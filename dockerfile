@@ -1,15 +1,16 @@
 FROM php:8.2-apache
 
-# Install dependensi sistem untuk PostgreSQL (libpq-dev)
+# Install dependensi PostgreSQL
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install ekstensi PDO PostgreSQL
 RUN docker-php-ext-install pdo pdo_pgsql
 
-# Salin seluruh file proyek ke dalam web server
+# Konfigurasi Apache agar mendengarkan port 80 secara dinamis
+RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
+# Salin file proyek
 COPY . /var/www/html/
 
-# Ubah hak akses folder
 RUN chown -R www-data:www-data /var/www/html
