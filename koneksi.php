@@ -1,14 +1,13 @@
-<?php
-$host = "aws-0-ap-south-1.pooler.supabase.com"; // Sesuaikan host Supabase kamu jika berbeda
-$port = "6543";
-$dbname = "postgres";
-$user = "postgres.gqkjqqrvxfmldrodttjg";
-$password = "postgresql://postgres.gqkjqqrvxfmldrodttjg:tunasaffandi@aws-0-ap-south-1.pooler.supabase.com:6543/postgres"; // Ganti dengan password database Supabase kamu
+$host = 'aws-0-ap-south-1.pooler.supabase.com';
+$port = '6543';
+$db   = 'postgres';
+$user = 'postgres.gqkjqqrvxfmldrodttjg';
+$pass = 'postgresql://postgres.gqkjqqrvxfmldrodttjg:tunasaffandi@aws-0-ap-south-1.pooler.supabase.com:6543/postgres';
 
 try {
-    $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Koneksi database gagal: " . $e->getMessage());
+    $dsn = "pgsql:host=$host;port=$port;dbname=$db";
+    $pdo = new PDO($dsn, $user, $pass);
+    // Berhasil terhubung
+} catch (\PDOException $e) {
+    echo "Koneksi database gagal: " . $e->getMessage();
 }
-?>
