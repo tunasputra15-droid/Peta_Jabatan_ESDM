@@ -7,7 +7,10 @@ RUN apt-get update && apt-get install -y \
 
 RUN docker-php-ext-install pdo pdo_pgsql
 
-# Konfigurasi Apache agar mendengarkan port 80 secara dinamis
+# Memperbaiki konflik MPM Apache di Docker
+RUN a2dismod mpm_event && a2enmod mpm_prefork
+
+# Konfigurasi port Apache agar membaca port dari Railway
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 # Salin file proyek
