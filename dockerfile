@@ -11,5 +11,5 @@ RUN docker-php-ext-install pdo pdo_pgsql
 COPY . /app
 WORKDIR /app
 
-# Jalankan server menggunakan port dinamis dari Railway
-CMD php -S 0.0.0.0:${PORT}
+# Jalankan server PHP dengan rute default langsung ke halaman login.php
+CMD php -S 0.0.0.0:${PORT} -t /app
