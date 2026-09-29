@@ -2,7 +2,7 @@
 session_start();
 include 'koneksi.php';
 
-// Proteksi halaman: Pastikan sudah login dan rolenya sesuai
+// Proteksi halaman
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
     header("Location: login.php");
     exit;
@@ -22,6 +22,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             --primary-esdm: #0A192F;
             --secondary-esdm: #172A45;
             --accent-gold: #C5A059;
+            --accent-gold-light: rgba(197, 160, 89, 0.1);
             --bg-body: #F4F7FC;
             --text-main: #334155;
             --sidebar-width: 260px;
@@ -41,7 +42,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             color: var(--text-main);
         }
 
-        /* Sidebar */
+        /* Sidebar Styling */
         .sidebar {
             width: var(--sidebar-width);
             background: linear-gradient(180deg, var(--primary-esdm) 0%, var(--secondary-esdm) 100%);
@@ -92,51 +93,43 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         }
 
         .sidebar ul li a:hover, .sidebar ul li a.active {
-            background-color: rgba(197, 160, 89, 0.15);
+            background-color: var(--accent-gold-light);
             color: #ffffff;
             border-left: 4px solid var(--accent-gold);
         }
 
-        /* Content */
+        /* Content Area */
         .content {
             flex: 1;
             padding: 30px;
             overflow-y: auto;
         }
 
-        /* Top Banner */
+        /* Modern Professional Banner */
         .top-banner {
-            background-color: var(--primary-esdm);
+            background: linear-gradient(135deg, var(--primary-esdm) 0%, var(--secondary-esdm) 100%);
             color: white;
-            padding: 20px 25px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 25px 30px;
+            border-radius: 12px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(10, 25, 47, 0.1);
+            border-left: 6px solid var(--accent-gold);
         }
 
         .top-banner h1 {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 19px;
+            font-weight: 700;
             letter-spacing: 0.5px;
+            margin-bottom: 6px;
         }
 
-        .admin-badge {
-            background: rgba(197, 160, 89, 0.2);
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .top-banner p {
+            font-size: 13px;
+            color: #94A3B8;
+            font-weight: 400;
         }
 
-        /* Action Toolbar */
+        /* Toolbar & Controls */
         .toolbar {
             display: flex;
             justify-content: space-between;
@@ -144,6 +137,10 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             margin-bottom: 30px;
             gap: 15px;
             flex-wrap: wrap;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .search-box {
@@ -154,17 +151,24 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 
         .search-box input {
             width: 100%;
-            padding: 10px 15px 10px 40px;
-            border: 1px solid #CBD5E1;
+            padding: 10px 15px 10px 42px;
+            border: 1px solid #E2E8F0;
             border-radius: 8px;
             font-size: 14px;
-            background: white;
+            background: #F8FAFC;
             outline: none;
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--accent-gold);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
         }
 
         .search-box i {
             position: absolute;
-            left: 14px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #94A3B8;
@@ -188,69 +192,74 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             align-items: center;
             gap: 8px;
             text-decoration: none;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
 
         .btn-action:hover {
             background-color: var(--secondary-esdm);
+            transform: translateY(-1px);
         }
 
-        /* Structural Org Chart Mockup */
+        /* Org Chart Hierarchy Styling */
         .org-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
         }
 
+        /* Top Director Card */
         .box-direktur {
             background: white;
             border: 2px solid var(--accent-gold);
-            border-radius: 12px;
-            padding: 20px 30px;
+            border-radius: 14px;
+            padding: 22px 35px;
             text-align: center;
             width: 100%;
-            max-width: 450px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            max-width: 480px;
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.12);
+            position: relative;
         }
 
         .box-direktur .role-title {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--accent-gold);
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
             text-transform: uppercase;
         }
 
         .box-direktur .role-name {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             color: var(--primary-esdm);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
         .counter-badge {
             display: inline-block;
-            background: #E2E8F0;
-            color: #1E293B;
-            padding: 4px 12px;
+            background: #F1F5F9;
+            color: #475569;
+            padding: 5px 14px;
             border-radius: 6px;
             font-size: 12px;
             font-weight: 600;
             letter-spacing: 1px;
+            border: 1px solid #E2E8F0;
         }
 
-        .connector-line {
-            width: 2px;
-            height: 35px;
-            background-color: #94A3B8;
+        .connector-vertical {
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(to bottom, var(--accent-gold), #94A3B8);
         }
 
+        /* Subordinate Grid Layout */
         .sub-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 25px;
             width: 100%;
         }
 
@@ -264,21 +273,27 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             background: white;
             border-radius: 12px;
             border: 1px solid #E2E8F0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
             overflow: hidden;
         }
 
         .sub-header {
             background: var(--primary-esdm);
             color: white;
-            padding: 12px 20px;
+            padding: 14px 20px;
             font-size: 14px;
             font-weight: 600;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sub-header i {
+            color: var(--accent-gold);
         }
 
         .sub-body {
-            padding: 15px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -288,17 +303,19 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
+            padding: 12px 16px;
             background: #F8FAFC;
-            border: 1px solid #E2E8F0;
+            border: 1px solid #F1F5F9;
             border-radius: 8px;
             font-size: 13px;
             font-weight: 500;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
 
         .position-item:hover {
             background: #EDF2F7;
+            border-color: #CBD5E1;
+            transform: translateX(2px);
         }
     </style>
 </head>
@@ -320,19 +337,17 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 
     <!-- Content Area -->
     <div class="content">
-        <!-- Top Banner -->
+        <!-- Professional Top Banner (Tanpa Tulisan Admin Panel) -->
         <div class="top-banner">
             <h1>PETA JABATAN DIREKTORAT PEMBINAAN USAHA HULU MINYAK DAN GAS BUMI</h1>
-            <div class="admin-badge">
-                <i class="fa-solid fa-shield-halved"></i> Admin Panel
-            </div>
+            <p>Direktorat Jenderal Minyak dan Gas Bumi — Kementerian Energi dan Sumber Daya Mineral</p>
         </div>
 
-        <!-- Toolbar Pencarian & Ekspor -->
+        <!-- Toolbar Pencarian & Aksi Data -->
         <div class="toolbar">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Cari jabatan...">
+                <input type="text" placeholder="Cari nama jabatan atau fungsional...">
             </div>
             <div class="action-buttons">
                 <button class="btn-action"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
@@ -341,19 +356,24 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             </div>
         </div>
 
-        <!-- Struktur Peta Jabatan -->
+        <!-- Struktur Peta Organisasi -->
         <div class="org-container">
+            <!-- Pimpinan Tertinggi -->
             <div class="box-direktur">
                 <div class="role-title">Direktur</div>
                 <div class="role-name">Pembinaan Usaha Hulu Minyak dan Gas Bumi</div>
                 <div class="counter-badge">15 - 0 - 0</div>
             </div>
 
-            <div class="connector-line"></div>
+            <div class="connector-vertical"></div>
 
+            <!-- Cabang Struktur Bawah -->
             <div class="sub-grid">
+                <!-- Kolom Kelompok Jabatan Fungsional -->
                 <div class="sub-card">
-                    <div class="sub-header">Kelompok Jabatan Fungsional</div>
+                    <div class="sub-header">
+                        <i class="fa-solid fa-users-gear"></i> Kelompok Jabatan Fungsional
+                    </div>
                     <div class="sub-body">
                         <div class="position-item"><span>Analis Kebijakan Ahli Madya</span><span class="counter-badge">12 - 2 - 6</span></div>
                         <div class="position-item"><span>Analis Kebijakan Ahli Muda</span><span class="counter-badge">10 - 1 - 20</span></div>
@@ -364,18 +384,23 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
                     </div>
                 </div>
 
+                <!-- Kolom Subbagian TU & Pelaksana -->
                 <div style="display: flex; flex-direction: column; gap: 20px;">
                     <div class="sub-card">
-                        <div class="sub-header">Kepala Subbagian Tata Usaha</div>
+                        <div class="sub-header">
+                            <i class="fa-solid fa-user-tie"></i> Kepala Subbagian Tata Usaha
+                        </div>
                         <div class="sub-body">
                             <div class="position-item" style="justify-content: center; background: transparent; border: none;">
-                                <span class="counter-badge">9 - 0 - 0</span>
+                                <span class="counter-badge" style="background: white; font-weight: 700;">9 - 0 - 0</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="sub-card">
-                        <div class="sub-header">Jabatan Pelaksana & Arsiparis</div>
+                        <div class="sub-header">
+                            <i class="fa-solid fa-address-card"></i> Jabatan Pelaksana & Arsiparis
+                        </div>
                         <div class="sub-body">
                             <div class="position-item"><span>Arsiparis Penyelia</span><span class="counter-badge">8 - 0 - 1</span></div>
                             <div class="position-item"><span>Arsiparis Mahir</span><span class="counter-badge">7 - 0 - 1</span></div>
