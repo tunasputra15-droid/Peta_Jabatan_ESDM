@@ -257,7 +257,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         </div>
         <ul>
             <li><a href="dashboard.php" class="active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
+            <li><a href="kelola_peta.php"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
             <li><a href="#"><i class="fa-solid fa-pen-to-square"></i> Usulan Tambah/Edit</a></li>
             <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
         </ul>
