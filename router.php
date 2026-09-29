@@ -4,7 +4,6 @@ $uri = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 if ($uri !== '/' && file_exists(__DIR__ . $uri)) {
     return false;
 } 
-// Jika mengakses dashboard
 else if ($uri === '/dashboard.php' || $uri === '/Dashboard.php') {
     if (file_exists(__DIR__ . '/dashboard.php')) {
         include 'dashboard.php';
@@ -12,12 +11,11 @@ else if ($uri === '/dashboard.php' || $uri === '/Dashboard.php') {
         echo "File dashboard.php tidak ditemukan!";
     }
 } 
-// Jika mengakses halaman kelola peta jabatan
-else if ($uri === '/kelola_peta.php') {
-    if (file_exists(__DIR__ . '/kelola_peta.php')) {
-        include 'kelola_peta.php';
+else if ($uri === '/kelola_peta_jabatan.php') {
+    if (file_exists(__DIR__ . '/kelola_peta_jabatan.php')) {
+        include 'kelola_peta_jabatan.php';
     } else {
-        echo "File kelola_peta.php tidak ditemukan!";
+        echo "File kelola_peta_jabatan.php tidak ditemukan!";
     }
 } 
 else {
