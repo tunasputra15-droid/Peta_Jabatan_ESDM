@@ -2,7 +2,7 @@
 session_start();
 include 'koneksi.php';
 
-// Proteksi halaman
+// Proteksi halaman: Pastikan sudah login dan rolenya sesuai
 if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
     header("Location: login.php");
     exit;
@@ -104,7 +104,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             overflow-y: auto;
         }
 
-        /* Top Bar / Banner */
+        /* Top Banner */
         .top-banner {
             background-color: var(--primary-esdm);
             color: white;
@@ -203,7 +203,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             gap: 25px;
         }
 
-        /* Direktur Card */
         .box-direktur {
             background: white;
             border: 2px solid var(--accent-gold);
@@ -248,7 +247,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             background-color: #94A3B8;
         }
 
-        /* Subordinate Section */
         .sub-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -314,7 +312,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-            <li><a href="kelola_peta.php" class="active"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
+            <li><a href="kelola_peta_jabatan.php" class="active"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
             <li><a href="#"><i class="fa-solid fa-pen-to-square"></i> Usulan Tambah/Edit</a></li>
             <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
         </ul>
@@ -345,7 +343,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 
         <!-- Struktur Peta Jabatan -->
         <div class="org-container">
-            <!-- Pimpinan Tertinggi (Direktur) -->
             <div class="box-direktur">
                 <div class="role-title">Direktur</div>
                 <div class="role-name">Pembinaan Usaha Hulu Minyak dan Gas Bumi</div>
@@ -354,9 +351,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 
             <div class="connector-line"></div>
 
-            <!-- Cabang Bawah (Fungsional & TU) -->
             <div class="sub-grid">
-                <!-- Kolom Fungsional -->
                 <div class="sub-card">
                     <div class="sub-header">Kelompok Jabatan Fungsional</div>
                     <div class="sub-body">
@@ -369,7 +364,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
                     </div>
                 </div>
 
-                <!-- Kolom Subbagian TU & Pelaksana -->
                 <div style="display: flex; flex-direction: column; gap: 20px;">
                     <div class="sub-card">
                         <div class="sub-header">Kepala Subbagian Tata Usaha</div>
