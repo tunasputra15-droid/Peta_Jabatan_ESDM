@@ -7,7 +7,9 @@ $pass = 'tunasaffandi'; // Sesuaikan password kamu
 
 try {
     $dsn = "pgsql:host=$host;port=$port;dbname=$db";
-    $pdo = new PDO($dsn, $user, $pass);
+    // Ubah dari $pdo menjadi $conn agar sesuai dengan login.php
+    $conn = new PDO($dsn, $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (\PDOException $e) {
     echo "Koneksi database gagal: " . $e->getMessage();
 }
