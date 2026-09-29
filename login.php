@@ -6,23 +6,25 @@ $error = '';
 
 if (isset($_POST['login'])) {
     $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
     
-    if (!empty($username)) {
+    if (!empty($username) && !empty($password)) {
         try {
             $stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
             $stmt->execute(['username' => $username]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                $_SESSION['user'] = $user['username'];
-                $_SESSION['role'] = $user['role'];
+                // Mencocokkan password (karena di database tersimpan teks biasa '12345')
+                if ($password === $user['password']) {
+                    $_SESSION['user'] = $user['username'];
+                    $_SESSION['role'] = isset($user['role']) ? $user['role'] : 'admin';
 
-                if ($user['role'] === 'admin_unit') {
-                    header("Location: admin_unit/dashboard.php");
+                    // Arahkan langsung ke dashboard utama (ubah jika nama file dashboard berbeda)
+                    header("Location: dashboard.php");
                     exit;
-                } elseif ($user['role'] === 'validator') {
-                    header("Location: admin_validator/dashboard.php");
-                    exit;
+                } else {
+                    $error = "Password yang Anda masukkan salah!";
                 }
             } else {
                 $error = "Username tidak ditemukan di database!";
@@ -31,7 +33,7 @@ if (isset($_POST['login'])) {
             $error = "Terjadi kesalahan sistem: " . $e->getMessage();
         }
     } else {
-        $error = "Silakan masukkan username terlebih dahulu!";
+        $error = "Silakan masukkan username dan password terlebih dahulu!";
     }
 }
 ?>
@@ -66,7 +68,11 @@ if (isset($_POST['login'])) {
                 <label>Username / NIP</label>
                 <input type="text" name="username" placeholder="Masukkan username..." required autocomplete="off">
             </div>
-            <button type="submit" name="login" class="btn-login">Masuk</button>
+            <div class="form-group" style="margin-top: 10px;">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Masukkan password..." required>
+            </div>
+            <button type="submit" name="login" class="btn-login" style="margin-top: 15px;">Masuk</button>
         </form>
     </div>
 </body>
