@@ -15,13 +15,13 @@ if (isset($_POST['login'])) {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user) {
-                // Mencocokkan password (karena di database tersimpan teks biasa '12345')
+                // Pengecekan password langsung (karena di database teks biasa '12345')
                 if ($password === $user['password']) {
                     $_SESSION['user'] = $user['username'];
                     $_SESSION['role'] = isset($user['role']) ? $user['role'] : 'admin';
 
-                    // Arahkan langsung ke dashboard utama (ubah jika nama file dashboard berbeda)
-                    header("Location: dashboard.php");
+                    // Menggunakan garis miring di depan (/) agar mengarah ke root utama dan tidak menumpuk folder
+                    header("Location: /dashboard.php");
                     exit;
                 } else {
                     $error = "Password yang Anda masukkan salah!";
