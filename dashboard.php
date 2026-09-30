@@ -15,14 +15,14 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin Unit - Peta Jabatan Kementerian ESDM</title>
+    <!-- Memuat Google Fonts & FontAwesome untuk ikon modern -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-esdm: #0A192F;
+            --primary-esdm: #0A192F; /* Biru Tua Formal Kementerian */
             --secondary-esdm: #172A45;
-            --accent-gold: #C5A059;
-            --accent-gold-light: rgba(197, 160, 89, 0.1);
+            --accent-gold: #C5A059;   /* Aksen Emas Kementerian ESDM */
             --bg-body: #F4F7FC;
             --text-main: #334155;
             --sidebar-width: 260px;
@@ -42,7 +42,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             color: var(--text-main);
         }
 
-        /* Sidebar Styling */
+        /* Sidebar Navigation */
         .sidebar {
             width: var(--sidebar-width);
             background: linear-gradient(180deg, var(--primary-esdm) 0%, var(--secondary-esdm) 100%);
@@ -63,6 +63,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             color: #ffffff;
+            letter-spacing: 0.5px;
         }
 
         .sidebar-brand i {
@@ -92,20 +93,25 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             transition: all 0.3s ease;
         }
 
+        .sidebar ul li a i {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
         .sidebar ul li a:hover, .sidebar ul li a.active {
-            background-color: var(--accent-gold-light);
+            background-color: rgba(197, 160, 89, 0.15);
             color: #ffffff;
             border-left: 4px solid var(--accent-gold);
         }
 
-        /* Content Area */
+        /* Main Content Area */
         .content {
             flex: 1;
             padding: 30px;
             overflow-y: auto;
         }
 
-        /* Header / Banner */
         .header {
             background: white;
             padding: 20px 30px;
@@ -119,7 +125,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         }
 
         .header h2 {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
             color: var(--primary-esdm);
         }
@@ -146,126 +152,71 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             background-color: #DC2626;
         }
 
-        /* Statistik Ringkasan & Tabel Section */
-        .stats-section {
-            background: white;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid #E2E8F0;
-            overflow: hidden;
+        /* Card Statistics Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
             margin-bottom: 30px;
         }
 
-        .stats-header {
-            padding: 20px 25px;
-            border-bottom: 1px solid #E2E8F0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: #FAFCFF;
-        }
-
-        .stats-header h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--primary-esdm);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .stats-header h3 i {
-            color: var(--accent-gold);
-        }
-
-        /* Summary Cards Grid */
-        .summary-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 25px;
-            background: #F8FAFC;
-            border-bottom: 1px solid #E2E8F0;
-        }
-
-        .summary-card-item {
+        .card {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #E2E8F0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            text-align: center;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            border-top: 4px solid var(--primary-esdm);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .summary-card-item .num {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--primary-esdm);
-            margin-bottom: 5px;
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
         }
 
-        .summary-card-item .label {
-            font-size: 12px;
-            font-weight: 600;
+        .card:nth-child(2) {
+            border-top-color: var(--accent-gold);
+        }
+
+        .card:nth-child(3) {
+            border-top-color: #10B981;
+        }
+
+        .card h4 {
             color: #64748B;
+            font-size: 13px;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Data Table Styling */
-        .table-responsive {
-            width: 100%;
-            overflow-x: auto;
+        .card h4 i {
+            font-size: 16px;
+            color: #94A3B8;
         }
 
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 13px;
-        }
-
-        .data-table th {
-            background-color: #F1F5F9;
+        .card .number {
+            font-size: 28px;
+            font-weight: 700;
             color: var(--primary-esdm);
-            font-weight: 600;
-            padding: 14px 20px;
-            border-bottom: 2px solid #E2E8F0;
-        }
-
-        .data-table td {
-            padding: 14px 20px;
-            border-bottom: 1px solid #F1F5F9;
-            color: var(--text-main);
-        }
-
-        .data-table tr:hover {
-            background-color: #F8FAFC;
-        }
-
-        .text-orange {
-            color: #D97706;
-            font-weight: 700;
-        }
-
-        .text-green {
-            color: #059669;
-            font-weight: 700;
         }
 
         /* Info Panel */
         .info-panel {
             background: white;
-            padding: 25px 30px;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-            border-left: 5px solid var(--primary-esdm);
         }
 
         .info-panel h3 {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--primary-esdm);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -278,7 +229,21 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         .info-panel p {
             color: #64748B;
             line-height: 1.6;
-            font-size: 13px;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 15px;
+            }
+            .content {
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -292,8 +257,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         </div>
         <ul>
             <li><a href="dashboard.php" class="active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-            <li><a href="kelola_peta_jabatan.php"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
-            <li><a href="statistik.php"><i class="fa-solid fa-chart-column"></i> Statistik Ringkasan</a></li>
+            <li><a href="#"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
             <li><a href="#"><i class="fa-solid fa-pen-to-square"></i> Usulan Tambah/Edit</a></li>
             <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
         </ul>
@@ -306,166 +270,19 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             <a href="logout.php" class="btn-logout"><i class="fa-solid fa-power-off"></i> Logout</a>
         </div>
 
-        <!-- Bagian Statistik Ringkasan & Tabel Rincian Data -->
-        <div class="stats-section">
-            <div class="stats-header">
-                <h3><i class="fa-solid fa-chart-column"></i> Statistik Ringkasan</h3>
+        <!-- Ringkasan Statistik -->
+        <div class="card-grid">
+            <div class="card">
+                <h4>Total Jabatan <i class="fa-solid fa-briefcase"></i></h4>
+                <div class="number">0</div>
             </div>
-
-            <!-- Kartu Angka Ringkasan -->
-            <div class="summary-cards">
-                <div class="summary-card-item">
-                    <div class="num">21</div>
-                    <div class="label">Total Jabatan</div>
-                </div>
-                <div class="summary-card-item">
-                    <div class="num">56</div>
-                    <div class="label">Total Kebutuhan</div>
-                </div>
-                <div class="summary-card-item">
-                    <div class="num">88</div>
-                    <div class="label">Total Formasi</div>
-                </div>
-                <div class="summary-card-item">
-                    <div class="num" style="font-size: 15px; margin-top: 6px; color: #64748B;">23/9/2026, 15.11.25</div>
-                    <div class="label">Update Terakhir</div>
-                </div>
+            <div class="card">
+                <h4>Status Pengajuan <i class="fa-solid fa-clock-rotate-left"></i></h4>
+                <div class="number" style="font-size: 22px; color: var(--accent-gold);">Draft</div>
             </div>
-
-            <!-- Tabel Rincian Data Formasi -->
-            <div class="table-responsive">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Jabatan</th>
-                            <th style="text-align: center;">Formasi</th>
-                            <th style="text-align: center;">Tervalidasi</th>
-                            <th style="text-align: center;">Sisa Formasi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Analis Kebijakan Ahli Madya</td>
-                            <td style="text-align: center;">6</td>
-                            <td style="text-align: center;">2</td>
-                            <td style="text-align: center;" class="text-orange">4</td>
-                        </tr>
-                        <tr>
-                            <td>Analis Kebijakan Ahli Muda</td>
-                            <td style="text-align: center;">20</td>
-                            <td style="text-align: center;">1</td>
-                            <td style="text-align: center;" class="text-orange">19</td>
-                        </tr>
-                        <tr>
-                            <td>Analis Kebijakan Ahli Pertama</td>
-                            <td style="text-align: center;">15</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">15</td>
-                        </tr>
-                        <tr>
-                            <td>Perencana Ahli Madya</td>
-                            <td style="text-align: center;">2</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">2</td>
-                        </tr>
-                        <tr>
-                            <td>Perencana Ahli Muda</td>
-                            <td style="text-align: center;">3</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">3</td>
-                        </tr>
-                        <tr>
-                            <td>Perencana Ahli Pertama</td>
-                            <td style="text-align: center;">4</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">4</td>
-                        </tr>
-                        <tr>
-                            <td>Inspektur Migas Ahli Madya</td>
-                            <td style="text-align: center;">3</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">3</td>
-                        </tr>
-                        <tr>
-                            <td>Inspektur Migas Ahli Muda</td>
-                            <td style="text-align: center;">5</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">5</td>
-                        </tr>
-                        <tr>
-                            <td>Inspektur Migas Ahli Pertama</td>
-                            <td style="text-align: center;">5</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">5</td>
-                        </tr>
-                        <tr>
-                            <td>Penata Perizinan Ahli Madya</td>
-                            <td style="text-align: center;">3</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">3</td>
-                        </tr>
-                        <tr>
-                            <td>Penata Perizinan Ahli Muda</td>
-                            <td style="text-align: center;">5</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">5</td>
-                        </tr>
-                        <tr>
-                            <td>Penata Perizinan Ahli Pertama</td>
-                            <td style="text-align: center;">6</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">6</td>
-                        </tr>
-                        <tr>
-                            <td>Penata Kelola Kegiatan Usaha Hulu Migas</td>
-                            <td style="text-align: center;">4</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">4</td>
-                        </tr>
-                        <tr>
-                            <td>Kepala Subbagian Tata Usaha</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-green">0</td>
-                        </tr>
-                        <tr>
-                            <td>Arsiparis Penyelia</td>
-                            <td style="text-align: center;">1</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">1</td>
-                        </tr>
-                        <tr>
-                            <td>Arsiparis Mahir</td>
-                            <td style="text-align: center;">1</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">1</td>
-                        </tr>
-                        <tr>
-                            <td>Arsiparis Terampil</td>
-                            <td style="text-align: center;">1</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">1</td>
-                        </tr>
-                        <tr>
-                            <td>Penelaah Teknis Kebijakan</td>
-                            <td style="text-align: center;">1</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">1</td>
-                        </tr>
-                        <tr>
-                            <td>Pengelola Layanan Operasional</td>
-                            <td style="text-align: center;">1</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">1</td>
-                        </tr>
-                        <tr>
-                            <td>Pengadministrasi Perkantoran</td>
-                            <td style="text-align: center;">2</td>
-                            <td style="text-align: center;">0</td>
-                            <td style="text-align: center;" class="text-orange">2</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card">
+                <h4>Hasil Verifikasi <i class="fa-solid fa-circle-check"></i></h4>
+                <div class="number">-</div>
             </div>
         </div>
 
@@ -473,7 +290,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         <div class="info-panel">
             <h3><i class="fa-solid fa-circle-info"></i> Panel Operasional Admin Unit</h3>
             <p>
-                Halaman utama ini menyajikan rekapitulasi data dan statistik ringkasan peta jabatan di lingkungan unit kerja Kementerian ESDM. Gunakan menu di sebelah kiri untuk mengelola rincian peta jabatan secara menyeluruh.
+                Halaman ini digunakan oleh Admin Unit Kementerian ESDM untuk menginput, memperbarui, serta mengajukan draf peta jabatan kepada Validator Pusat secara terintegrasi dan transparan.
             </p>
         </div>
     </div>
