@@ -272,15 +272,10 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
                     <div class="num">88</div>
                     <div class="label">Total Formasi</div>
                 </div>
-               <div class="summary-card-item">
-               <div class="num" style="font-size: 15px; margin-top: 6px; color: #64748B;">
-            <?php 
-                date_default_timezone_set('Asia/Jakarta');
-                echo date('d/m/Y, H:i:s'); 
-                ?>
-                </div>
+              <div class="summary-card-item">
+                    <div class="num" id="realtime-clock" style="font-size: 15px; margin-top: 6px; color: #64748B;">Memuat waktu...</div>
                     <div class="label">Update Terakhir</div>
-                </div>
+                    </div>
             </div>
 
             <div class="table-responsive">
