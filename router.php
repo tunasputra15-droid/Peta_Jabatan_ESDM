@@ -18,6 +18,13 @@ else if ($uri === '/kelola_peta_jabatan.php') {
         echo "File kelola_peta_jabatan.php tidak ditemukan!";
     }
 } 
+else if ($uri === '/statistik.php') {
+    if (file_exists(__DIR__ . '/statistik.php')) {
+        include 'statistik.php';
+    } else {
+        echo "File statistik.php tidak ditemukan!";
+    }
+} 
 else {
     if (file_exists(__DIR__ . '/login.php')) {
         include 'login.php';
