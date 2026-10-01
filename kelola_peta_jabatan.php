@@ -18,12 +18,12 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
+:root {
             --primary-esdm: #0A192F;
             --secondary-esdm: #172A45;
             --accent-gold: #C5A059;
-            --accent-gold-light: rgba(197, 160, 89, 0.1);
-            --bg-body: #F4F7FC;
+            --accent-gold-light: rgba(197, 160, 89, 0.15);
+            --bg-body: #E0F2FE; /* Warna latar belakang biru langit (Sky Blue) yang fresh */
             --text-main: #334155;
             --sidebar-width: 260px;
         }
@@ -42,27 +42,28 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             color: var(--text-main);
         }
 
-        /* Sidebar Styling */
+        /* Sidebar Styling (Menjadi Putih Bersih) */
         .sidebar {
             width: var(--sidebar-width);
-            background: linear-gradient(180deg, var(--primary-esdm) 0%, var(--secondary-esdm) 100%);
-            color: white;
+            background: #FFFFFF;
+            color: var(--primary-esdm);
             padding: 25px 20px;
             display: flex;
             flex-direction: column;
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.04);
+            border-right: 1px solid #E2E8F0;
         }
 
         .sidebar-brand {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             margin-bottom: 30px;
             padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            border-bottom: 1px solid #E2E8F0;
+            color: var(--primary-esdm);
         }
 
         .sidebar-brand i {
@@ -80,7 +81,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
         }
 
         .sidebar ul li a {
-            color: #94A3B8;
+            color: #64748B;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -92,10 +93,30 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             transition: all 0.3s ease;
         }
 
-        .sidebar ul li a:hover, .sidebar ul li a.active {
+        .sidebar ul li a i {
+            color: #94A3B8;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #F1F5F9;
+            color: var(--primary-esdm);
+        }
+
+        .sidebar ul li a:hover i {
+            color: var(--primary-esdm);
+        }
+
+        /* Menu Sidebar yang Aktif */
+        .sidebar ul li a.active {
             background-color: var(--accent-gold-light);
-            color: #ffffff;
+            color: var(--primary-esdm);
+            font-weight: 600;
             border-left: 4px solid var(--accent-gold);
+        }
+
+        .sidebar ul li a.active i {
+            color: var(--accent-gold);
         }
 
         /* Content Area */
