@@ -2,345 +2,117 @@
 session_start();
 include 'koneksi.php';
 
-// Proteksi halaman: Cek apakah user sudah login dan role-nya admin_unit
-if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
+if (!isset($_SESSION['user'])) {
     header("Location: login.php");
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin Unit - Peta Jabatan Kementerian ESDM</title>
-    <!-- Memuat Google Fonts & FontAwesome untuk ikon modern -->
+    <title>Dashboard - SIMPEG Kementerian ESDM</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-:root {
+        :root {
             --primary-esdm: #0A192F;
             --secondary-esdm: #172A45;
             --accent-gold: #C5A059;
-            --accent-gold-light: rgba(197, 160, 89, 0.15);
-            --bg-body: #E0F2FE; /* Warna latar belakang biru langit (Sky Blue) yang fresh */
+            --bg-body: #E0F2FE;
             --text-main: #334155;
             --sidebar-width: 260px;
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-body); display: flex; min-height: 100vh; color: var(--text-main); }
+        
+        /* Sidebar Styling */
+        .sidebar { width: var(--sidebar-width); background: #FFFFFF; padding: 25px 20px; display: flex; flex-direction: column; border-right: 1px solid #E2E8F0; }
+        .sidebar-brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #E2E8F0; color: var(--primary-esdm); }
+        .sidebar-brand i { color: var(--accent-gold); font-size: 22px; }
+        .sidebar ul { list-style: none; padding: 0; flex: 1; }
+        .sidebar ul li { margin-bottom: 8px; }
+        .sidebar ul li a { color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: 0.2s; }
+        .sidebar ul li a:hover, .sidebar ul li a.active { background-color: #F1F5F9; color: var(--primary-esdm); }
+        
+        /* Dropdown Styling */
+        .submenu { list-style: none; padding-left: 25px; margin-top: 5px; display: none; }
+        .submenu.show { display: block; }
+        .submenu li a { font-size: 13px; padding: 8px 10px; color: #64748B; font-weight: 600; }
+        .submenu li a:hover { color: var(--primary-esdm); }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-body);
-            display: flex;
-            min-height: 100vh;
-            color: var(--text-main);
-        }
-
-        /* Sidebar Styling (Menjadi Putih Bersih) */
-        .sidebar {
-            width: var(--sidebar-width);
-            background: #FFFFFF;
-            color: var(--primary-esdm);
-            padding: 25px 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.04);
-            border-right: 1px solid #E2E8F0;
-        }
-
-        .sidebar-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #E2E8F0;
-            color: var(--primary-esdm);
-        }
-
-        .sidebar-brand i {
-            color: var(--accent-gold);
-            font-size: 22px;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            flex: 1;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 8px;
-        }
-
-        .sidebar ul li a {
-            color: #64748B;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar ul li a i {
-            color: #94A3B8;
-            transition: color 0.3s ease;
-        }
-
-        .sidebar ul li a:hover {
-            background-color: #F1F5F9;
-            color: var(--primary-esdm);
-        }
-
-        .sidebar ul li a:hover i {
-            color: var(--primary-esdm);
-        }
-
-        /* Menu Sidebar yang Aktif */
-        .sidebar ul li a.active {
-            background-color: var(--accent-gold-light);
-            color: var(--primary-esdm);
-            font-weight: 600;
-            border-left: 4px solid var(--accent-gold);
-        }
-
-        .sidebar ul li a.active i {
-            color: var(--accent-gold);
-        }
-
-        /* Main Content Area */
-        .content {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
-
-        .header {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 5px solid var(--accent-gold);
-        }
-
-        .header h2 {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--primary-esdm);
-        }
-
-        .header h2 span {
-            color: var(--accent-gold);
-        }
-
-        .btn-logout {
-            background-color: #EF4444;
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.2s;
-        }
-
-        .btn-logout:hover {
-            background-color: #DC2626;
-        }
-
-        /* Card Statistics Grid */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: white;
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-            border-top: 4px solid var(--primary-esdm);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
-        }
-
-        .card:nth-child(2) {
-            border-top-color: var(--accent-gold);
-        }
-
-        .card:nth-child(3) {
-            border-top-color: #10B981;
-        }
-
-        .card h4 {
-            color: #64748B;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card h4 i {
-            font-size: 16px;
-            color: #94A3B8;
-        }
-
-        .card .number {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--primary-esdm);
-        }
-
-        /* Info Panel */
-        .info-panel {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-        }
-
-        .info-panel h3 {
-            font-size: 18px;
-            color: var(--primary-esdm);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .info-panel h3 i {
-            color: var(--accent-gold);
-        }
-
-        .info-panel p {
-            color: #64748B;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            .sidebar {
-                width: 100%;
-                padding: 15px;
-            }
-            .content {
-                padding: 15px;
-            }
-        }
+        /* Content Area */
+        .content { flex: 1; padding: 30px; }
+        .card { background: white; padding: 25px; border-radius: 12px; border: 1px solid #E2E8F0; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
     </style>
 </head>
 <body>
 
     <!-- Sidebar -->
-<div class="sidebar">
-    <div class="sidebar-brand">
-        <i class="fa-solid fa-building-shield"></i>
-        <span>ADMIN UNIT ESDM</span>
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-building-shield"></i>
+            <span>ADMIN UNIT ESDM</span>
+        </div>
+        <ul>
+            <li>
+                <a href="dashboard.php" class="active">
+                    <i class="fa-solid fa-chart-pie" style="color: var(--accent-gold);"></i> Dashboard
+                </a>
+            </li>
+            
+            <!-- Menu Dropdown Kelola Peta Jabatan -->
+            <li class="has-submenu">
+                <a href="#" class="dropdown-toggle" id="menu-peta">
+                    <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
+                    <i class="fa-solid fa-chevron-down arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
+                </a>
+                <ul class="submenu" id="submenu-peta">
+                    <li><a href="sekretariat_jenderal.php">Sekretariat Jenderal</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-pen-to-square"></i> Usulan Tambah/Edit
+                </a>
+            </li>
+
+            <li style="margin-top: 20px;">
+                <a href="logout.php">
+                    <i class="fa-solid fa-right-from-bracket"></i> Keluar
+                </a>
+            </li>
+        </ul>
     </div>
-    <ul style="list-style: none; padding: 0;">
-        <!-- 1. Menu Dashboard -->
-        <li style="margin-bottom: 8px;">
-            <a href="dashboard.php" style="color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500;">
-                <i class="fa-solid fa-chart-pie" style="color: #94A3B8;"></i> Dashboard
-            </a>
-        </li>
-        
-        <!-- 2. Menu Kelola Peta Jabatan (Dropdown) -->
-        <li class="has-submenu" style="margin-bottom: 8px;">
-            <a href="#" class="dropdown-toggle" style="background: #FACC15; color: #0A192F; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 700;">
-                <i class="fa-solid fa-sitemap" style="color: #0A192F;"></i> Kelola Peta Jabatan 
-                <i class="fa-solid fa-chevron-up arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
-            </a>
-            <!-- Submenu di dalam dropdown -->
-            <ul class="submenu" style="list-style: none; padding-left: 20px; margin-top: 6px; display: block;">
-                <li style="margin-bottom: 4px;">
-                    <a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 10px; color: #FACC15; text-decoration: none; display: block; font-weight: 600;">
-                        1. Sekretariat Jenderal
-                    </a>
-                </li>
-            </ul>
-        </li>
 
-        <!-- 3. Menu Usulan Tambah/Edit -->
-        <li style="margin-bottom: 8px;">
-            <a href="#" style="color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500;">
-                <i class="fa-solid fa-pen-to-square" style="color: #94A3B8;"></i> Usulan Tambah/Edit
-            </a>
-        </li>
-
-        <!-- 4. Menu Keluar (Paling Bawah dengan Ikon yang Benar) -->
-        <li style="margin-top: 20px;">
-            <a href="logout.php" style="color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500;">
-                <i class="fa-solid fa-right-from-bracket" style="color: #94A3B8;"></i> Keluar
-            </a>
-        </li>
-    </ul>
-</div>
-
-    <!-- Content Area -->
+    <!-- Content -->
     <div class="content">
-        <div class="header">
-            <h2>Selamat Datang, <span><?php echo htmlspecialchars($_SESSION['user']); ?></span>!</h2>
-            <a href="logout.php" class="btn-logout"><i class="fa-solid fa-power-off"></i> Logout</a>
-        </div>
-
-        <!-- Ringkasan Statistik -->
-        <div class="card-grid">
-            <div class="card">
-                <h4>Total Jabatan <i class="fa-solid fa-briefcase"></i></h4>
-                <div class="number">0</div>
-            </div>
-            <div class="card">
-                <h4>Status Pengajuan <i class="fa-solid fa-clock-rotate-left"></i></h4>
-                <div class="number" style="font-size: 22px; color: var(--accent-gold);">Draft</div>
-            </div>
-            <div class="card">
-                <h4>Hasil Verifikasi <i class="fa-solid fa-circle-check"></i></h4>
-                <div class="number">-</div>
-            </div>
-        </div>
-
-        <!-- Panel Informasi / Operasional -->
-        <div class="info-panel">
-            <h3><i class="fa-solid fa-circle-info"></i> Panel Operasional Admin Unit</h3>
-            <p>
-                Halaman ini digunakan oleh Admin Unit Kementerian ESDM untuk menginput, memperbarui, serta mengajukan draf peta jabatan kepada Validator Pusat secara terintegrasi dan transparan.
-            </p>
+        <div class="card">
+            <h2 style="color: var(--primary-esdm); margin-bottom: 10px;">Selamat Datang di Dashboard SIMPEG</h2>
+            <p>Sistem Informasi Manajemen Kepegawaian Kementerian Energi dan Sumber Daya Mineral.</p>
         </div>
     </div>
 
+    <!-- Script Dropdown Naik Turun -->
+    <script>
+        const dropdownToggle = document.getElementById('menu-peta');
+        const submenu = document.getElementById('submenu-peta');
+        const arrowIcon = dropdownToggle.querySelector('.arrow-icon');
+
+        dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            submenu.classList.toggle('show');
+            
+            if (submenu.classList.contains('show')) {
+                arrowIcon.classList.remove('fa-chevron-down');
+                arrowIcon.classList.add('fa-chevron-up');
+            } else {
+                arrowIcon.classList.remove('fa-chevron-up');
+                arrowIcon.classList.add('fa-chevron-down');
+            }
+        });
+    </script>
 </body>
 </html>
