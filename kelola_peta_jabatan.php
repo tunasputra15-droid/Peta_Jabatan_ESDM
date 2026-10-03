@@ -303,8 +303,8 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
+<!-- Sidebar -->
+   <div class="sidebar">
     <div class="sidebar-brand">
         <i class="fa-solid fa-building-shield"></i>
         <span>ADMIN UNIT ESDM</span>
@@ -312,19 +312,20 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
     <ul>
         <li><a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
         
-        <!-- Menu Kelola Peta Jabatan dengan Dropdown -->
+        <!-- Menu Kelola Peta Jabatan dengan Dropdown Interaktif -->
         <li class="has-submenu">
-            <a href="kelola_peta_jabatan.php" class="active">
+            <a href="#" class="dropdown-toggle active" style="background: #FACC15; color: #0A192F; border-radius: 8px; font-weight: 700;">
                 <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
-                <i class="fa-solid fa-chevron-up" style="margin-left: auto; font-size: 11px;"></i>
+                <i class="fa-solid fa-chevron-up arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
             </a>
-            <ul class="submenu" style="list-style: none; padding-left: 20px; margin-top: 5px;">
-                <li><a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 12px; color: var(--accent-gold); font-weight: 600;">1. Sekretariat Jenderal</a></li>
-                <li><a href="ditjen_migas.php" style="font-size: 13px; padding: 8px 12px; color: #64748B;">2. Ditjen Migas</a></li>
-                <!-- Tambahan unit lainnya sesuai kebutuhan -->
-            </ul>
-        </li>
-        <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
+            <!-- Submenu yang bisa buka-tutup -->
+            <ul class="submenu" style="list-style: none; padding-left: 15px; margin-top: 8px; display: block;">
+                <li style="margin-bottom: 6px;">
+                    <a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 12px; color: #FACC15; text-decoration: none; display: block; font-weight: 600;">
+                        1. Sekretariat Jenderal
+                    </a>
+                </li>
+        <li style="margin-top: 10px;"><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
     </ul>
 </div>
 
@@ -514,5 +515,28 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 
     </div>
 
+<script>
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const submenu = document.querySelector('.submenu');
+    const arrowIcon = document.querySelector('.arrow-icon');
+
+    if (dropdownToggle) {
+        dropdownToggle.addEventListener('click', function(e) {
+            e.preventDefault(); // Mencegah link pindah halaman langsung jika hanya ingin toggle
+            
+            // Cek apakah submenu sedang terbuka atau tertutup
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+                arrowIcon.classList.remove('fa-chevron-up');
+                arrowIcon.classList.add('fa-chevron-down');
+            } else {
+                submenu.style.display = 'block';
+                arrowIcon.classList.remove('fa-chevron-down');
+                arrowIcon.classList.add('fa-chevron-up');
+            }
+        });
+    }
+</script> 
+    
 </body>
 </html>
