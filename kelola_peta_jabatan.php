@@ -45,7 +45,7 @@ if (!isset($_SESSION['user'])) {
         
         /* Submenu Dropdown */
         .submenu { list-style: none; padding-left: 20px; margin-top: 6px; display: block; border-left: 2px solid #E2E8F0; margin-left: 15px; }
-        .submenu li a { font-size: 13px; padding: 8px 10px; color: #64748B; font-weight: 600; white-space: normal; /* Agar teks panjang unit eselon I bisa membungkus rapi ke bawah */ }
+        .submenu li a { font-size: 10px; padding: 8px 10px; color: #64748B; font-weight: 600; white-space: normal; line-height: 1.4; /* Agar teks panjang unit eselon I bisa membungkus rapi ke bawah */ }
         .submenu li a:hover { color: var(--primary-esdm); }
 
         /* Main Content Area */
