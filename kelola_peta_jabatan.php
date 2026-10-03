@@ -211,24 +211,32 @@ if (!isset($_SESSION['user'])) {
         </div>
     </div>
 
-    <!-- Script Dropdown Naik Turun -->
-    <script>
-        const dropdownToggle = document.getElementById('menu-peta');
-        const submenu = document.getElementById('submenu-peta');
+<!-- Script Dropdown Naik Turun yang Aman -->
+<script>
+    const dropdownToggle = document.getElementById('menu-peta');
+    const submenu = document.getElementById('submenu-peta');
+    
+    if (dropdownToggle) {
         const arrowIcon = dropdownToggle.querySelector('.arrow-icon');
 
         dropdownToggle.addEventListener('click', function(e) {
             e.preventDefault();
+            
             if (submenu.style.display === 'none' || submenu.style.display === '') {
                 submenu.style.display = 'block';
-                arrowIcon.classList.remove('fa-chevron-down');
-                arrowIcon.classList.add('fa-chevron-up');
+                if (arrowIcon) {
+                    arrowIcon.classList.remove('fa-chevron-down');
+                    arrowIcon.classList.add('fa-chevron-up');
+                }
             } else {
                 submenu.style.display = 'none';
-                arrowIcon.classList.remove('fa-chevron-up');
-                arrowIcon.classList.add('fa-chevron-down');
+                if (arrowIcon) {
+                    arrowIcon.classList.remove('fa-chevron-up');
+                    arrowIcon.classList.add('fa-chevron-down');
+                }
             }
         });
-    </script>
+    }
+</script>
 </body>
 </html>
