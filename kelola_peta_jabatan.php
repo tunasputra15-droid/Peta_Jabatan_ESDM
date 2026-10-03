@@ -305,17 +305,28 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-brand">
-            <i class="fa-solid fa-building-shield"></i>
-            <span>ADMIN UNIT ESDM</span>
-        </div>
-        <ul>
-            <li><a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-            <li><a href="kelola_peta_jabatan.php" class="active"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
-            <li><a href="profil.php"><i class="fa-solid fa-user-shield"></i> Profil Pegawai</a></li>
-            <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
-        </ul>
+    <div class="sidebar-brand">
+        <i class="fa-solid fa-building-shield"></i>
+        <span>ADMIN UNIT ESDM</span>
     </div>
+    <ul>
+        <li><a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+        
+        <!-- Menu Kelola Peta Jabatan dengan Dropdown -->
+        <li class="has-submenu">
+            <a href="kelola_peta_jabatan.php" class="active">
+                <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
+                <i class="fa-solid fa-chevron-up" style="margin-left: auto; font-size: 11px;"></i>
+            </a>
+            <ul class="submenu" style="list-style: none; padding-left: 20px; margin-top: 5px;">
+                <li><a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 12px; color: var(--accent-gold); font-weight: 600;">1. Sekretariat Jenderal</a></li>
+                <li><a href="ditjen_migas.php" style="font-size: 13px; padding: 8px 12px; color: #64748B;">2. Ditjen Migas</a></li>
+                <!-- Tambahan unit lainnya sesuai kebutuhan -->
+            </ul>
+        </li>
+        <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
+    </ul>
+</div>
 
     <!-- Content Utama -->
     <div class="content">
