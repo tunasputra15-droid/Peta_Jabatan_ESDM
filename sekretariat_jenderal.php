@@ -49,7 +49,7 @@ if (!isset($_SESSION['user'])) {
         .submenu-item.sub-active { color: #D97706; font-weight: 700; background: #FEF9C3; }
 
         /* Main Wrapper Kanan */
-        .main-wrapper { margin-left: var(--sidebar-width); flex-grow: 1; display: flex; flex-direction: column; min-height: 100vh; }
+        .main-wrapper { margin-left: var(--sidebar-width); flex-grow: 1; display: flex; flex-direction: column; min-height: 100vh; width: calc(100% - var(--sidebar-width)); }
 
         .top-header { background: var(--accent-gold); color: var(--primary-esdm); padding: 16px 35px; font-size: 15px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
         .top-header-right { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; color: var(--primary-esdm); }
@@ -109,19 +109,35 @@ if (!isset($_SESSION['user'])) {
 
         .tree-horizontal-line {
             position: relative;
-            width: 92%;
-            height: 3px;
+            width: 91%;
+            height: 2px;
             background-color: #D97706;
             margin-bottom: 20px;
         }
 
         .children-nodes { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; width: 100%; z-index: 2; }
         
-       .child-card-link { text-decoration: none; color: inherit; display: block; }
-        .child-card-link:hover { transform: translateY(-3px); }
+      .child-card-link { 
+            text-decoration: none; 
+            color: inherit; 
+            display: block; 
+            position: relative;
+            padding-top: 20px; /* Disesuaikan agar pas menyambung */
+        }
 
-        /* Desain Kotak Eselon II */
-      .child-card { 
+        .child-card-link::before {
+            content: '';
+            position: absolute;
+            top: -20px; /* Ditarik sedikit ke atas agar menembus dan menyatu dengan garis horizontal */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 55px;
+            background-color: #D97706;
+            z-index: 1;
+        }
+
+        .child-card { 
             background: #FFFFFF; 
             border: 2px solid var(--accent-gold); 
             border-radius: 8px; 
@@ -129,46 +145,20 @@ if (!isset($_SESSION['user'])) {
             text-align: center; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
             position: relative;
+            z-index: 2;
             height: 100%;
-            transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; /* Hanya transisi warna, tanpa translateY pada kotak utama */
+            transition: all 0.25s ease-in-out;
         }
 
-
-        /* Efek saat kursor diarahkan, HANYA kotak kartu yang naik & berubah warna */
-       .child-card-link:hover .child-card {
+        .child-card-link:hover .child-card {
             background-color: #FEF9C3; 
             border-color: #D97706; 
+            transform: translateY(-4px); 
             box-shadow: 0 6px 15px rgba(217, 119, 6, 0.15); 
-            transform: none;
         }
 
-      .child-card::before {
-            content: '';
-            position: absolute;
-            top: -23px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 23px;
-            background-color: #D97706;
-            z-index: 3;
-        }
-
-.child-card .unit-name { 
-            font-size: 9.5px; 
-            font-weight: 800; 
-            color: #0A192F; 
-            height: 38px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            margin-bottom: 8px; 
-            line-height: 1.15; 
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-
+        .child-card .unit-name { font-size: 9.5px; font-weight: 800; color: #0A192F; height: 38px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; line-height: 1.15; }
         
-
         .child-stats-box { 
             background: #F8FAFC; 
             border: 1px solid #E2E8F0; 
@@ -186,7 +176,7 @@ if (!isset($_SESSION['user'])) {
         .child-stats-box .c-eks { color: #059669; font-size: 9px; font-weight: 800; }
         .child-stats-box .c-sel { color: #DC2626; font-size: 9px; font-weight: 800; }
 
-        /* Tabel Rangkuman Eselon II dengan Ikon Kreatif (fa-layer-group) */
+        /* Tabel Rangkuman Eselon II */
         .table-section { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; overflow: hidden; margin-top: 20px; }
         .table-header-bar { background: var(--accent-gold); padding: 12px 20px; font-size: 12px; font-weight: 800; color: #000; }
         
@@ -220,14 +210,15 @@ if (!isset($_SESSION['user'])) {
             </a>
             
             <div>
-                <div class="menu-item dropdown-toggle active" id="dropdownBtn">
+                <!-- Menu utama biasa (tidak aktif kuning penuh) -->
+                <div class="menu-item dropdown-toggle" id="dropdownBtn">
                     <div class="menu-item-left">
                         <i class="fa-solid fa-sitemap"></i>
                         <span>Kelola Peta Jabatan</span>
                     </div>
                     <i class="fa-solid fa-chevron-up" id="arrowIcon" style="font-size: 11px;"></i>
                 </div>
-                <!-- Submenu tanpa nomor -->
+                <!-- Submenu dengan Sekretariat Jenderal sebagai sub-active -->
                 <div class="submenu-container show" id="submenuList">
                     <a href="sekretariat_jenderal.php" class="submenu-item sub-active">Sekretariat Jenderal</a>
                     <a href="#" class="submenu-item">Direktorat Jenderal Minyak dan Gas Bumi</a>
@@ -259,17 +250,16 @@ if (!isset($_SESSION['user'])) {
         </div>
     </div>
 
-    <!-- Main Wrapper Kanan -->
+    <!-- Main Wrapper Kanan (Konten Halaman) -->
     <div class="main-wrapper">
         <div class="top-header">
             <span>Sekretariat Jenderal</span>
             <div class="top-header-right">
-                <div class="user-avatar">AD</div>
-                <span>Admin Unit</span>
             </div>
         </div>
 
-        <div class="container">     
+        <div class="container">
+            
             <div class="page-header-box">
                 <div class="page-title">Peta Jabatan</div>
                 <div class="page-subtitle">Sekretariat Jenderal</div>
@@ -443,7 +433,7 @@ if (!isset($_SESSION['user'])) {
                 </div>
             </div>
 
-            <!-- Tabel Rangkuman Eselon II dengan Ikon Kreatif (fa-layer-group) -->
+            <!-- Tabel Rangkuman Eselon II -->
             <div class="table-section">
                 <div class="table-header-bar">NAMA UNIT KERJA ESELON II</div>
                 <table class="eselon2-table">
