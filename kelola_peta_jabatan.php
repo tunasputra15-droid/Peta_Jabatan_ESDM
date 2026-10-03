@@ -99,27 +99,26 @@ if (!isset($_SESSION['user'])) {
             </li>
             
 <li class="has-submenu" style="position: relative; margin-bottom: 8px;">
-    <div style="display: flex; align-items: center; background: #F1F5F9; border-radius: 8px; overflow: hidden;">
-        <!-- Area Teks Utama: Mengarah langsung ke halaman kelola_peta_jabatan.php -->
-        <a href="kelola_peta_jabatan.php" style="flex: 1; color: var(--primary-esdm); text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; font-size: 14px; font-weight: 700; white-space: nowrap;">
+    <div style="display: flex; align-items: center; border-radius: 8px; overflow: hidden;">
+        <!-- Teks Utama Menu -->
+        <a href="kelola_peta_jabatan.php" style="flex: 1; color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; font-size: 14px; font-weight: 500;">
             <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan
         </a>
-        <!-- Area Khusus Ikon Panah: Hanya untuk membuka/menutup dropdown naik-turun -->
-        <span id="btn-toggle-dropdown" style="padding: 12px 15px; cursor: pointer; color: var(--primary-esdm); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.03); transition: 0.2s;">
-            <i class="fa-solid fa-chevron-up arrow-icon" style="font-size: 11px;"></i>
+        <!-- Tombol Panah Tanpa Background Kotak Abu-abu -->
+        <span id="btn-toggle-dropdown" style="padding: 12px 15px; cursor: pointer; color: #64748B; display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-chevron-down arrow-icon" style="font-size: 11px;"></i>
         </span>
     </div>
 
-    <!-- Submenu di bawahnya (Default tertutup/none, atau tampil block jika ingin pas di halaman tersebut) -->
+    <!-- Submenu -->
     <ul class="submenu" id="submenu-peta" style="list-style: none; padding-left: 20px; margin-top: 6px; display: none; border-left: 2px solid #E2E8F0; margin-left: 15px;">
-        <li style="margin-bottom: 4px;"><a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Sekretariat Jenderal</a></li>
-        <li style="margin-bottom: 4px;"><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Minyak dan Gas Bumi</a></li>
-        <li style="margin-bottom: 4px;"><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Ketenagalistrikan</a></li>
-        <li style="margin-bottom: 4px;"><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Mineral Dan Batubara</a></li>
+        <li><a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Sekretariat Jenderal</a></li>
+        <li><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Minyak dan Gas Bumi</a></li>
+        <li><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Ketenagalistrikan</a></li>
+        <li><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Mineral Dan Batubara</a></li>
         <li><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Ditjen EBTKE</a></li>
     </ul>
 </li>
-
             <li>
                 <a href="#"><i class="fa-solid fa-pen-to-square"></i> Usulan Tambah/Edit</a>
             </li>
