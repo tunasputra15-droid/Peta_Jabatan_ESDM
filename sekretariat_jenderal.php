@@ -269,9 +269,7 @@ if (!isset($_SESSION['user'])) {
             </div>
         </div>
 
-        <div class="container">
-            <a href="kelola_peta_jabatan.php" class="back-link"><i class="fa-solid fa-arrow-left"></i> Kembali ke Pusat</a>
-            
+        <div class="container">     
             <div class="page-header-box">
                 <div class="page-title">Peta Jabatan</div>
                 <div class="page-subtitle">Sekretariat Jenderal</div>
