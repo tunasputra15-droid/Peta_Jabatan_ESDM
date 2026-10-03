@@ -97,10 +97,10 @@ if (!isset($_SESSION['user'])) {
             </li>
             
             <li class="has-submenu">
-                <a href="#" class="dropdown-toggle" id="menu-peta">
-                    <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
-                    <i class="fa-solid fa-chevron-up arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
-                </a>
+             <a href="kelola_peta_jabatan.php" class="dropdown-toggle" id="menu-peta">
+             <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
+             <i class="fa-solid fa-chevron-down arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
+             </a>
                 <ul class="submenu" id="submenu-peta">
                     <li><a href="sekretariat_jenderal.php">Sekretariat Jenderal</a></li>
                     <li><a href="#">Direktorat Jenderal Minyak dan Gas Bumi</a></li>
