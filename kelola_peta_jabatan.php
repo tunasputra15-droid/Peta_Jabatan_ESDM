@@ -22,7 +22,7 @@ if (!isset($_SESSION['user'])) {
         --accent-gold: #C5A059;
         --bg-body: #E0F2FE;
         --text-main: #334155;
-        --sidebar-width: 330px; /* <--- Ubah ukurannya di sini (misal dari 280px menjadi 330px) */
+        --sidebar-width: 350px; /* <--- Ubah ukurannya di sini (misal dari 280px menjadi 330px) */
     }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
@@ -44,12 +44,12 @@ if (!isset($_SESSION['user'])) {
         .dropdown-toggle { background: #F1F5F9 !important; color: var(--primary-esdm) !important; font-weight: 700 !important; }
         
         /* Submenu Dropdown */
-        .submenu { list-style: none; padding-left: 20px; margin-top: 6px; display: block; border-left: 2px solid #E2E8F0; margin-left: 15px; }
+        .submenu { list-style: none; padding-left: 20px; padding-right: 15px; margin-top: 8px; display: block; border-left: 2px solid #E2E8F0; margin-left: 15px; }
         .submenu li a { font-size: 10px; padding: 6px 15px 6px 10px; color: #64748B; font-weight: 400; white-space: normal; line-height: 1.4; /* Agar teks panjang unit eselon I bisa membungkus rapi ke bawah */ }
         .submenu li a:hover { color: var(--primary-esdm); }
 
         /* Main Content Area */
-      .main-content { margin-left: var(--sidebar-width);flex: 1; display: flex; flex-direction: column;}
+      .main-content { margin-left: 340px ;flex: 1; display: flex; flex-direction: column;}
         
         /* Top Header Baru (Warna Biru Profesional, Tanpa AD) */
         .top-header { background: var(--primary-esdm); padding: 18px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
