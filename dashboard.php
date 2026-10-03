@@ -64,11 +64,11 @@ if (!isset($_SESSION['user'])) {
             
             <!-- Menu Dropdown Kelola Peta Jabatan -->
             <li class="has-submenu">
-                <a href="#" class="dropdown-toggle" id="menu-peta">
-                    <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
+              <a href="kelola_peta_jabatan.php" class="dropdown-toggle" id="menu-peta">
+                    <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan
                     <i class="fa-solid fa-chevron-down arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
                 </a>
-                <ul class="submenu" id="submenu-peta">
+                            <ul class="submenu" id="submenu-peta">
                     <li><a href="sekretariat_jenderal.php">Sekretariat Jenderal</a></li>
                 </ul>
             </li>
@@ -95,24 +95,25 @@ if (!isset($_SESSION['user'])) {
         </div>
     </div>
 
-    <!-- Script Dropdown Naik Turun -->
+<!-- Script Dropdown Naik Turun -->
     <script>
-        const dropdownToggle = document.getElementById('menu-peta');
-        const submenu = document.getElementById('submenu-peta');
-        const arrowIcon = dropdownToggle.querySelector('.arrow-icon');
+            const btnToggle = document.getElementById('btn-toggle-dropdown');
+            const submenu = document.getElementById('submenu-peta');
+            const arrowIcon = btnToggle.querySelector('.arrow-icon');
 
-        dropdownToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            submenu.classList.toggle('show');
-            
-            if (submenu.classList.contains('show')) {
-                arrowIcon.classList.remove('fa-chevron-down');
-                arrowIcon.classList.add('fa-chevron-up');
-            } else {
-                arrowIcon.classList.remove('fa-chevron-up');
-                arrowIcon.classList.add('fa-chevron-down');
-            }
-        });
-    </script>
+    // Tombol panah hanya mengontrol naik-turun dropdown tanpa mengganggu perpindahan halaman
+    btnToggle.addEventListener('click', function(e) {
+        e.stopPropagation(); // Mencegah bubbling event
+        if (submenu.style.display === 'none' || submenu.style.display === '') {
+            submenu.style.display = 'block';
+            arrowIcon.classList.remove('fa-chevron-down');
+            arrowIcon.classList.add('fa-chevron-up');
+        } else {
+            submenu.style.display = 'none';
+            arrowIcon.classList.remove('fa-chevron-up');
+            arrowIcon.classList.add('fa-chevron-down');
+        }
+    });
+</script>
 </body>
 </html>
