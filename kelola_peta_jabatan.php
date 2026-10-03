@@ -304,30 +304,48 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 <body>
 
 <!-- Sidebar -->
-   <div class="sidebar">
+<div class="sidebar">
     <div class="sidebar-brand">
         <i class="fa-solid fa-building-shield"></i>
         <span>ADMIN UNIT ESDM</span>
     </div>
-    <ul>
-        <li><a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
-        <li><a href="#"><i class="fa-solid fa-chart-pie"></i> Usulan Tambah/Edit</a></li>
-        <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
+    <ul style="list-style: none; padding: 0;">
+        <!-- 1. Menu Dashboard -->
+        <li style="margin-bottom: 8px;">
+            <a href="dashboard.php" style="color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500;">
+                <i class="fa-solid fa-chart-pie" style="color: #94A3B8;"></i> Dashboard
+            </a>
+        </li>
         
-        <!-- Menu Kelola Peta Jabatan dengan Dropdown Interaktif -->
-        <li class="has-submenu">
-            <a href="#" class="dropdown-toggle active" style="background: #FACC15; color: #0A192F; border-radius: 8px; font-weight: 700;">
-                <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
+        <!-- 2. Menu Kelola Peta Jabatan (Dropdown) -->
+        <li class="has-submenu" style="margin-bottom: 8px;">
+            <a href="#" class="dropdown-toggle" style="background: #FACC15; color: #0A192F; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 700;">
+                <i class="fa-solid fa-sitemap" style="color: #0A192F;"></i> Kelola Peta Jabatan 
                 <i class="fa-solid fa-chevron-up arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
             </a>
-            <!-- Submenu yang bisa buka-tutup -->
-            <ul class="submenu" style="list-style: none; padding-left: 15px; margin-top: 8px; display: block;">
-                <li style="margin-bottom: 6px;">
-                    <a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 12px; color: #FACC15; text-decoration: none; display: block; font-weight: 600;">
+            <!-- Submenu di dalam dropdown -->
+            <ul class="submenu" style="list-style: none; padding-left: 20px; margin-top: 6px; display: block;">
+                <li style="margin-bottom: 4px;">
+                    <a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 10px; color: #FACC15; text-decoration: none; display: block; font-weight: 600;">
                         1. Sekretariat Jenderal
                     </a>
                 </li>
-        <li style="margin-top: 10px;"><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
+            </ul>
+        </li>
+
+        <!-- 3. Menu Usulan Tambah/Edit -->
+        <li style="margin-bottom: 8px;">
+            <a href="#" style="color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500;">
+                <i class="fa-solid fa-pen-to-square" style="color: #94A3B8;"></i> Usulan Tambah/Edit
+            </a>
+        </li>
+
+        <!-- 4. Menu Keluar (Paling Bawah dengan Ikon yang Benar) -->
+        <li style="margin-top: 20px;">
+            <a href="logout.php" style="color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500;">
+                <i class="fa-solid fa-right-from-bracket" style="color: #94A3B8;"></i> Keluar
+            </a>
+        </li>
     </ul>
 </div>
 
