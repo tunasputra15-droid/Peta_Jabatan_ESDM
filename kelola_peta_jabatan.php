@@ -20,38 +20,40 @@ if (!isset($_SESSION['user'])) {
             --primary-esdm: #0A192F;
             --secondary-esdm: #172A45;
             --accent-gold: #C5A059;
-            --bg-body: #E0F2FE; /* Background biru bawaan aplikasi kita */
+            --bg-body: #E0F2FE;
             --text-main: #334155;
-            --sidebar-width: 260px;
+            --sidebar-width: 280px; /* Diperlebar sedikit agar teks tidak turun ke bawah */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); display: flex; min-height: 100vh; color: var(--text-main); }
 
-        /* Sidebar Putih Bersih sesuai bawaan */
+        /* Sidebar Putih Bersih */
         .sidebar { width: var(--sidebar-width); background: #FFFFFF; padding: 25px 20px; display: flex; flex-direction: column; border-right: 1px solid #E2E8F0; position: fixed; height: 100vh; overflow-y: auto; box-shadow: 4px 0 15px rgba(0,0,0,0.04); }
         .sidebar-brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #E2E8F0; color: var(--primary-esdm); }
         .sidebar-brand i { color: var(--accent-gold); font-size: 22px; }
         
         .sidebar ul { list-style: none; padding: 0; flex: 1; }
         .sidebar ul li { margin-bottom: 8px; }
-        .sidebar ul li a { color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: 0.2s; }
+        
+        /* Menu Utama Link */
+        .sidebar ul li a { color: #64748B; text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: 0.2s; white-space: nowrap; }
         .sidebar ul li a:hover { background-color: #F1F5F9; color: var(--primary-esdm); }
         
-        /* Dropdown Styling */
-        .dropdown-toggle { background: var(--primary-esdm); color: white !important; font-weight: 700 !important; }
-        .dropdown-toggle i { color: var(--accent-gold) !important; }
+        /* Tombol Kelola Peta Jabatan Aktif (Background Abu-abu seperti Gambar 2) */
+        .dropdown-toggle { background: #F1F5F9 !important; color: var(--primary-esdm) !important; font-weight: 700 !important; }
+        
+        /* Submenu Dropdown */
         .submenu { list-style: none; padding-left: 20px; margin-top: 6px; display: block; border-left: 2px solid #E2E8F0; margin-left: 15px; }
-        .submenu li a { font-size: 13px; padding: 8px 10px; color: #64748B; font-weight: 600; }
-        .submenu li a:hover, .submenu li a.active-sub { color: var(--primary-esdm); }
+        .submenu li a { font-size: 13px; padding: 8px 10px; color: #64748B; font-weight: 600; white-space: normal; /* Agar teks panjang unit eselon I bisa membungkus rapi ke bawah */ }
+        .submenu li a:hover { color: var(--primary-esdm); }
 
         /* Main Content Area */
         .main-content { margin-left: var(--sidebar-width); flex: 1; display: flex; flex-direction: column; }
         
-        /* Top Header Kuning Kementerian */
-        .top-header { background: #FACC15; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .top-header span { font-size: 14px; font-weight: 700; color: var(--primary-esdm); }
-        .user-avatar { background: var(--primary-esdm); color: #FACC15; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        /* Top Header Baru (Warna Biru Profesional, Tanpa AD) */
+        .top-header { background: var(--primary-esdm); padding: 18px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .top-header span { font-size: 16px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.5px; }
 
         /* Content Body */
         .content-body { padding: 30px; }
@@ -61,7 +63,7 @@ if (!isset($_SESSION['user'])) {
 
         /* Stat Card Item */
         .stat-card-box { background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 20px 25px; margin-bottom: 15px; display: grid; grid-template-columns: 50px 1.5fr 1fr 1fr 1fr; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-        .stat-icon { width: 40px; height: 40px; background: rgba(197, 160, 89, 0.15); color: var(--accent-gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .stat-icon { width: 40px; height: 40px; background: rgba(10, 25, 47, 0.08); color: var(--primary-esdm); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
         .stat-label { font-size: 13px; font-weight: 800; color: var(--primary-esdm); letter-spacing: 0.5px; }
         .stat-col { text-align: center; }
         .stat-col .label { font-size: 10px; font-weight: 700; color: #64748B; text-transform: uppercase; margin-bottom: 4px; }
@@ -85,7 +87,7 @@ if (!isset($_SESSION['user'])) {
 </head>
 <body>
 
-    <!-- Sidebar Putih Bersih -->
+    <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-brand">
             <i class="fa-solid fa-building-shield"></i>
@@ -96,19 +98,27 @@ if (!isset($_SESSION['user'])) {
                 <a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
             </li>
             
-            <li class="has-submenu">
-             <a href="kelola_peta_jabatan.php" class="dropdown-toggle" id="menu-peta">
-             <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan 
-             <i class="fa-solid fa-chevron-down arrow-icon" style="margin-left: auto; font-size: 11px;"></i>
-             </a>
-                <ul class="submenu" id="submenu-peta">
-                    <li><a href="sekretariat_jenderal.php">Sekretariat Jenderal</a></li>
-                    <li><a href="#">Direktorat Jenderal Minyak dan Gas Bumi</a></li>
-                    <li><a href="#">Direktorat Jenderal Ketenagalistrikan</a></li>
-                    <li><a href="#">Direktorat Jenderal Mineral Dan Batubara</a></li>
-                    <li><a href="#">Ditjen EBTKE</a></li>
-                </ul>
-            </li>
+<li class="has-submenu" style="position: relative; margin-bottom: 8px;">
+    <div style="display: flex; align-items: center; background: #F1F5F9; border-radius: 8px; overflow: hidden;">
+        <!-- Area Teks Utama: Mengarah langsung ke halaman kelola_peta_jabatan.php -->
+        <a href="kelola_peta_jabatan.php" style="flex: 1; color: var(--primary-esdm); text-decoration: none; display: flex; align-items: center; gap: 12px; padding: 12px 15px; font-size: 14px; font-weight: 700; white-space: nowrap;">
+            <i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan
+        </a>
+        <!-- Area Khusus Ikon Panah: Hanya untuk membuka/menutup dropdown naik-turun -->
+        <span id="btn-toggle-dropdown" style="padding: 12px 15px; cursor: pointer; color: var(--primary-esdm); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.03); transition: 0.2s;">
+            <i class="fa-solid fa-chevron-up arrow-icon" style="font-size: 11px;"></i>
+        </span>
+    </div>
+
+    <!-- Submenu di bawahnya (Default tertutup/none, atau tampil block jika ingin pas di halaman tersebut) -->
+    <ul class="submenu" id="submenu-peta" style="list-style: none; padding-left: 20px; margin-top: 6px; display: none; border-left: 2px solid #E2E8F0; margin-left: 15px;">
+        <li style="margin-bottom: 4px;"><a href="sekretariat_jenderal.php" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Sekretariat Jenderal</a></li>
+        <li style="margin-bottom: 4px;"><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Minyak dan Gas Bumi</a></li>
+        <li style="margin-bottom: 4px;"><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Ketenagalistrikan</a></li>
+        <li style="margin-bottom: 4px;"><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Direktorat Jenderal Mineral Dan Batubara</a></li>
+        <li><a href="#" style="font-size: 13px; padding: 8px 10px; color: #64748B; text-decoration: none; display: block; font-weight: 600;">Ditjen EBTKE</a></li>
+    </ul>
+</li>
 
             <li>
                 <a href="#"><i class="fa-solid fa-pen-to-square"></i> Usulan Tambah/Edit</a>
@@ -122,10 +132,9 @@ if (!isset($_SESSION['user'])) {
 
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Top Header Kuning -->
+        <!-- Top Header Baru (Professional Navy & Tanpa AD) -->
         <div class="top-header">
-            <span>Kementerian ESDM</span>
-            <div class="user-avatar">AD</div>
+            <span>Kelola Peta Jabatan</span>
         </div>
 
         <!-- Content Body -->
@@ -211,32 +220,27 @@ if (!isset($_SESSION['user'])) {
         </div>
     </div>
 
-<!-- Script Dropdown Naik Turun yang Aman -->
-<script>
-    const dropdownToggle = document.getElementById('menu-peta');
+    <!-- Script Dropdown Naik Turun -->
+  <script>
+    const btnToggle = document.getElementById('btn-toggle-dropdown');
     const submenu = document.getElementById('submenu-peta');
-    
-    if (dropdownToggle) {
-        const arrowIcon = dropdownToggle.querySelector('.arrow-icon');
+    const arrowIcon = btnToggle.querySelector('.arrow-icon');
 
-        dropdownToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            if (submenu.style.display === 'none' || submenu.style.display === '') {
-                submenu.style.display = 'block';
-                if (arrowIcon) {
-                    arrowIcon.classList.remove('fa-chevron-down');
-                    arrowIcon.classList.add('fa-chevron-up');
-                }
-            } else {
-                submenu.style.display = 'none';
-                if (arrowIcon) {
-                    arrowIcon.classList.remove('fa-chevron-up');
-                    arrowIcon.classList.add('fa-chevron-down');
-                }
-            }
-        });
-    }
+    // Dropdown hanya merespons ketika ikon panah di sebelah kanan yang diklik
+    btnToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation(); // Mencegah bentrok dengan elemen lain
+        
+        if (submenu.style.display === 'none' || submenu.style.display === '') {
+            submenu.style.display = 'block';
+            arrowIcon.classList.remove('fa-chevron-down');
+            arrowIcon.classList.add('fa-chevron-up');
+        } else {
+            submenu.style.display = 'none';
+            arrowIcon.classList.remove('fa-chevron-up');
+            arrowIcon.classList.add('fa-chevron-down');
+        }
+    });
 </script>
 </body>
 </html>
