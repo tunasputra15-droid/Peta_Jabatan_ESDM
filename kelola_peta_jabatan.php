@@ -311,6 +311,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
     </div>
     <ul>
         <li><a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fa-solid fa-chart-pie"></i> Usulan Tambah/Edit</a></li>
         
         <!-- Menu Kelola Peta Jabatan dengan Dropdown Interaktif -->
         <li class="has-submenu">
