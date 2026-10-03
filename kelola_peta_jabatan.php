@@ -12,26 +12,45 @@ if (!isset($_SESSION['user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peta Jabatan Kementerian ESDM</title>
+    <title>Peta Jabatan Kementerian ESDM - Admin Unit</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-esdm: #0A192F;
             --accent-gold: #FFC107;
-            --bg-body: #FDFBF7;
+            --bg-body: #F4F6F9;
             --text-main: #334155;
+            --sidebar-width: 260px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-body); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
+        body { background-color: var(--bg-body); color: var(--text-main); display: flex; min-height: 100vh; }
 
-        /* Header Kuning Atas */
-        .top-banner { background-color: var(--accent-gold); padding: 16px 30px; font-weight: 800; font-size: 14px; color: var(--primary-esdm); box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
-        .user-badge { width: 32px; height: 32px; background: var(--primary-esdm); color: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
+        /* Sidebar Kiri */
+        .sidebar { width: var(--sidebar-width); background: #FFFFFF; border-right: 1px solid #E2E8F0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; }
+        .sidebar-brand { padding: 20px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1F5F9; font-size: 14px; font-weight: 800; color: var(--primary-esdm); }
+        .sidebar-brand i { font-size: 18px; color: #D97706; background: #FEF9C3; padding: 8px; border-radius: 6px; }
 
-        /* Container */
-        .container { padding: 30px 40px; max-width: 1600px; margin: 0 auto; width: 100%; }
+        .sidebar-menu { padding: 20px 12px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: #64748B; transition: 0.2s; }
+        .menu-item-left { display: flex; align-items: center; gap: 12px; }
+        .menu-item i { font-size: 15px; width: 20px; text-align: center; }
+        
+        .menu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
+        .menu-item.active { background: #F1F5F9; color: var(--primary-esdm); font-weight: 700; }
+        .menu-item.active i { color: #D97706; }
+
+        /* Main Content Wrapper */
+        .main-wrapper { margin-left: var(--sidebar-width); flex-grow: 1; display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* Top Header Bar di Kanan */
+        .top-header { background: var(--primary-esdm); color: #FFFFFF; padding: 16px 35px; font-size: 15px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .top-header-right { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; }
+        .user-avatar { width: 30px; height: 30px; background: var(--accent-gold); color: var(--primary-esdm); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; }
+
+        /* Container Isi Halaman */
+        .container { padding: 30px 35px; max-width: 1400px; width: 100%; }
 
         /* Judul Halaman dengan Garis Pembatas Abu-Abu Lembut */
         .page-header-box { 
@@ -39,7 +58,7 @@ if (!isset($_SESSION['user'])) {
             border-bottom: 1.5px solid #CBD5E1; 
             padding-bottom: 15px; 
         }
-        .page-title { font-size: 22px; font-weight: 800; color: #000; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .page-title { font-size: 20px; font-weight: 800; color: #000; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
         .page-subtitle { font-size: 11px; font-weight: 600; color: #64748B; }
 
         /* Stat Card Baris (Lebar Penuh) */
@@ -48,7 +67,7 @@ if (!isset($_SESSION['user'])) {
         .stat-icon-box { width: 34px; height: 34px; background: #FEF9C3; border: 1px solid #FDE047; color: #854D0E; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
         .stat-label-text { font-size: 12px; font-weight: 800; color: #1E293B; letter-spacing: 0.3px; }
         
-        .stat-right-values { display: flex; gap: 80px; align-items: center; }
+        .stat-right-values { display: flex; gap: 60px; align-items: center; }
         .stat-val-item { text-align: right; }
         .stat-val-item .title { font-size: 8.5px; font-weight: 700; color: #64748B; text-transform: uppercase; display: block; margin-bottom: 2px; }
         .stat-val-item .number-blue { font-size: 14px; font-weight: 800; color: #2563EB; }
@@ -75,147 +94,191 @@ if (!isset($_SESSION['user'])) {
 </head>
 <body>
 
-    <!-- Header Kuning Atas -->
-    <div class="top-banner">
-        <span>Kementerian ESDM</span>
+    <!-- Sidebar Kiri -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fa-solid fa-building-shield"></i>
+            <span>ADMIN UNIT ESDM</span>
+        </div>
+        <div class="sidebar-menu">
+            <a href="dashboard.php" class="menu-item">
+                <div class="menu-item-left">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </div>
+            </a>
+            <a href="kelola_peta_jabatan.php" class="menu-item active">
+                <div class="menu-item-left">
+                    <i class="fa-solid fa-sitemap"></i>
+                    <span>Kelola Peta Jabatan</span>
+                </div>
+                <i class="fa-solid fa-chevron-down" style="font-size: 11px;"></i>
+            </a>
+            <a href="usulan.php" class="menu-item">
+                <div class="menu-item-left">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Usulan Tambah/Edit</span>
+                </div>
+            </a>
+            <a href="logout.php" class="menu-item" style="margin-top: auto; color: #DC2626;">
+                <div class="menu-item-left">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Keluar</span>
+                </div>
+            </a>
+        </div>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
+    <!-- Main Wrapper Kanan -->
+    <div class="main-wrapper">
         
-        <!-- Judul Halaman dengan Garis Pembatas -->
-        <div class="page-header-box">
-            <div class="page-title">Peta Jabatan Kementerian ESDM</div>
-            <div class="page-subtitle">Rekapitulasi Kebutuhan dan Eksisting Pegawai Tingkat Kementerian</div>
-        </div>
-
-        <!-- Kartu Statistik Utama -->
-        <div class="stat-card-row">
-            <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-users"></i></div><div class="stat-label-text">TOTAL PEGAWAI</div></div>
-            <div class="stat-right-values">
-                <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">6240</span></div>
-                <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">5892</span></div>
-                <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-348</span></div>
+        <!-- Top Header Bar -->
+        <div class="top-header">
+            <span>Dashboard Administrator</span>
+            <div class="top-header-right">
+                <div class="user-avatar">AD</div>
+                <span>Admin Unit</span>
             </div>
         </div>
 
-        <div class="stat-card-row">
-            <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-user-tie"></i></div><div class="stat-label-text">JABATAN STRUKTURAL</div></div>
-            <div class="stat-right-values">
-                <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">125</span></div>
-                <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">118</span></div>
-                <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-7</span></div>
+        <!-- Container Konten -->
+        <div class="container">
+            
+            <!-- Judul Halaman dengan Garis Pembatas -->
+            <div class="page-header-box">
+                <div class="page-title">Peta Jabatan Kementerian ESDM</div>
+                <div class="page-subtitle">Rekapitulasi Kebutuhan dan Eksisting Pegawai Tingkat Kementerian</div>
             </div>
-        </div>
 
-        <div class="stat-card-row">
-            <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-user-gear"></i></div><div class="stat-label-text">JAB. ADMIN / PENGAWAS</div></div>
-            <div class="stat-right-values">
-                <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">450</span></div>
-                <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">412</span></div>
-                <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-38</span></div>
+            <!-- Kartu Statistik Utama -->
+            <div class="stat-card-row">
+                <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-users"></i></div><div class="stat-label-text">TOTAL PEGAWAI</div></div>
+                <div class="stat-right-values">
+                    <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">6240</span></div>
+                    <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">5892</span></div>
+                    <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-348</span></div>
+                </div>
             </div>
-        </div>
 
-        <div class="stat-card-row">
-            <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-graduation-cap"></i></div><div class="stat-label-text">JABATAN FUNGSIONAL</div></div>
-            <div class="stat-right-values">
-                <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">4120</span></div>
-                <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">3950</span></div>
-                <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-170</span></div>
+            <div class="stat-card-row">
+                <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-user-tie"></i></div><div class="stat-label-text">JABATAN STRUKTURAL</div></div>
+                <div class="stat-right-values">
+                    <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">125</span></div>
+                    <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">118</span></div>
+                    <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-7</span></div>
+                </div>
             </div>
-        </div>
 
-        <div class="stat-card-row">
-            <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-user-shield"></i></div><div class="stat-label-text">JABATAN PELAKSANA</div></div>
-            <div class="stat-right-values">
-                <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">1545</span></div>
-                <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">1412</span></div>
-                <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-133</span></div>
+            <div class="stat-card-row">
+                <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-user-gear"></i></div><div class="stat-label-text">JAB. ADMIN / PENGAWAS</div></div>
+                <div class="stat-right-values">
+                    <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">450</span></div>
+                    <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">412</span></div>
+                    <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-38</span></div>
+                </div>
             </div>
-        </div>
 
-        <!-- Tabel Rangkuman Unit Eselon I -->
-        <div class="table-section">
-            <div class="table-header-bar">Rangkuman Unit Eselon I</div>
-            <table class="eselon1-table">
-                <thead>
-                    <tr>
-                        <th>NAMA UNIT KERJA ESELON I</th>
-                        <th>KEBUTUHAN</th>
-                        <th>EKSISTING</th>
-                        <th>SELISIH</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="sekretariat_jenderal.php" class="unit-link">1. Sekretariat Jenderal</a></td>
-                        <td class="num-b">820</td>
-                        <td class="num-e">765</td>
-                        <td class="num-s">-55</td>
-                    </tr>
-                    <tr>
-                        <td>2. Direktorat Jenderal Minyak dan Gas Bumi</td>
-                        <td class="num-b">600</td>
-                        <td class="num-e">550</td>
-                        <td class="num-s">-50</td>
-                    </tr>
-                    <tr>
-                        <td>3. Direktorat Jenderal Ketenagalistrikan</td>
-                        <td class="num-b">450</td>
-                        <td class="num-e">420</td>
-                        <td class="num-s">-30</td>
-                    </tr>
-                    <tr>
-                        <td>4. Direktorat Jenderal Mineral Dan Batubara</td>
-                        <td class="num-b">700</td>
-                        <td class="num-e">680</td>
-                        <td class="num-s">-20</td>
-                    </tr>
-                    <tr>
-                        <td>5. Ditjen Energi Baru, Terbarukan & Konservasi Energi</td>
-                        <td class="num-b">500</td>
-                        <td class="num-e">470</td>
-                        <td class="num-s">-30</td>
-                    </tr>
-                    <tr>
-                        <td>6. Direktorat Jenderal Penegakan Hukum ESDM</td>
-                        <td class="num-b">400</td>
-                        <td class="num-e">350</td>
-                        <td class="num-s">-50</td>
-                    </tr>
-                    <tr>
-                        <td>7. Inspektorat Jenderal</td>
-                        <td class="num-b">350</td>
-                        <td class="num-e">340</td>
-                        <td class="num-s">-10</td>
-                    </tr>
-                    <tr>
-                        <td>8. Badan Geologi</td>
-                        <td class="num-b">850</td>
-                        <td class="num-e">800</td>
-                        <td class="num-s">-50</td>
-                    </tr>
-                    <tr>
-                        <td>9. Badan Pengembangan SDM ESDM</td>
-                        <td class="num-b">650</td>
-                        <td class="num-e">620</td>
-                        <td class="num-s">-30</td>
-                    </tr>
-                    <tr>
-                        <td>10. Sekretariat Jenderal Dewan Energi Nasional</td>
-                        <td class="num-b">220</td>
-                        <td class="num-e">200</td>
-                        <td class="num-s">-20</td>
-                    </tr>
-                    <tr>
-                        <td>11. Badan Pengatur Hilir Minyak Dan Gas Bumi</td>
-                        <td class="num-b">700</td>
-                        <td class="num-e">697</td>
-                        <td class="num-s">-3</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="stat-card-row">
+                <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-graduation-cap"></i></div><div class="stat-label-text">JABATAN FUNGSIONAL</div></div>
+                <div class="stat-right-values">
+                    <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">4120</span></div>
+                    <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">3950</span></div>
+                    <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-170</span></div>
+                </div>
+            </div>
+
+            <div class="stat-card-row">
+                <div class="stat-left"><div class="stat-icon-box"><i class="fa-solid fa-user-shield"></i></div><div class="stat-label-text">JABATAN PELAKSANA</div></div>
+                <div class="stat-right-values">
+                    <div class="stat-val-item"><span class="title">KEBUTUHAN</span><span class="number-blue">1545</span></div>
+                    <div class="stat-val-item"><span class="title">EKSISTING</span><span class="number-green">1412</span></div>
+                    <div class="stat-val-item"><span class="title">SELISIH</span><span class="number-red">-133</span></div>
+                </div>
+            </div>
+
+            <!-- Tabel Rangkuman Unit Eselon I -->
+            <div class="table-section">
+                <div class="table-header-bar">Rangkuman Unit Eselon I</div>
+                <table class="eselon1-table">
+                    <thead>
+                        <tr>
+                            <th>NAMA UNIT KERJA ESELON I</th>
+                            <th>KEBUTUHAN</th>
+                            <th>EKSISTING</th>
+                            <th>SELISIH</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="sekretariat_jenderal.php" class="unit-link">1. Sekretariat Jenderal</a></td>
+                            <td class="num-b">820</td>
+                            <td class="num-e">765</td>
+                            <td class="num-s">-55</td>
+                        </tr>
+                        <tr>
+                            <td>2. Direktorat Jenderal Minyak dan Gas Bumi</td>
+                            <td class="num-b">600</td>
+                            <td class="num-e">550</td>
+                            <td class="num-s">-50</td>
+                        </tr>
+                        <tr>
+                            <td>3. Direktorat Jenderal Ketenagalistrikan</td>
+                            <td class="num-b">450</td>
+                            <td class="num-e">420</td>
+                            <td class="num-s">-30</td>
+                        </tr>
+                        <tr>
+                            <td>4. Direktorat Jenderal Mineral Dan Batubara</td>
+                            <td class="num-b">700</td>
+                            <td class="num-e">680</td>
+                            <td class="num-s">-20</td>
+                        </tr>
+                        <tr>
+                            <td>5. Ditjen Energi Baru, Terbarukan & Konservasi Energi</td>
+                            <td class="num-b">500</td>
+                            <td class="num-e">470</td>
+                            <td class="num-s">-30</td>
+                        </tr>
+                        <tr>
+                            <td>6. Direktorat Jenderal Penegakan Hukum ESDM</td>
+                            <td class="num-b">400</td>
+                            <td class="num-e">350</td>
+                            <td class="num-s">-50</td>
+                        </tr>
+                        <tr>
+                            <td>7. Inspektorat Jenderal</td>
+                            <td class="num-b">350</td>
+                            <td class="num-e">340</td>
+                            <td class="num-s">-10</td>
+                        </tr>
+                        <tr>
+                            <td>8. Badan Geologi</td>
+                            <td class="num-b">850</td>
+                            <td class="num-e">800</td>
+                            <td class="num-s">-50</td>
+                        </tr>
+                        <tr>
+                            <td>9. Badan Pengembangan SDM ESDM</td>
+                            <td class="num-b">650</td>
+                            <td class="num-e">620</td>
+                            <td class="num-s">-30</td>
+                        </tr>
+                        <tr>
+                            <td>10. Sekretariat Jenderal Dewan Energi Nasional</td>
+                            <td class="num-b">220</td>
+                            <td class="num-e">200</td>
+                            <td class="num-s">-20</td>
+                        </tr>
+                        <tr>
+                            <td>11. Badan Pengatur Hilir Minyak Dan Gas Bumi</td>
+                            <td class="num-b">700</td>
+                            <td class="num-e">697</td>
+                            <td class="num-s">-3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
     </div>
