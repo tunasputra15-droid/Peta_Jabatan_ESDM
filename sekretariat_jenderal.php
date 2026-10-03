@@ -201,54 +201,57 @@ if (!isset($_SESSION['user'])) {
             <i class="fa-solid fa-building-shield"></i>
             <span>ADMIN UNIT ESDM</span>
         </div>
-        <div class="sidebar-menu">
-            <a href="dashboard.php" class="menu-item">
-                <div class="menu-item-left">
-                    <i class="fa-solid fa-chart-pie"></i>
-                    <span>Dashboard</span>
-                </div>
-            </a>
-            
-            <div>
-                <!-- Menu utama biasa (tidak aktif kuning penuh) -->
-                <div class="menu-item dropdown-toggle" id="dropdownBtn">
-                    <div class="menu-item-left">
-                        <i class="fa-solid fa-sitemap"></i>
-                        <span>Kelola Peta Jabatan</span>
-                    </div>
-                    <i class="fa-solid fa-chevron-up" id="arrowIcon" style="font-size: 11px;"></i>
-                </div>
-                <!-- Submenu dengan Sekretariat Jenderal sebagai sub-active -->
-                <div class="submenu-container show" id="submenuList">
-                    <a href="sekretariat_jenderal.php" class="submenu-item sub-active">Sekretariat Jenderal</a>
-                    <a href="#" class="submenu-item">Direktorat Jenderal Minyak dan Gas Bumi</a>
-                    <a href="#" class="submenu-item">Direktorat Jenderal Ketenagalistrikan</a>
-                    <a href="#" class="submenu-item">Direktorat Jenderal Mineral Dan Batubara</a>
-                    <a href="#" class="submenu-item">Ditjen Energi Baru, Terbarukan & Konservasi Energi</a>
-                    <a href="#" class="submenu-item">Direktorat Jenderal Penegakan Hukum ESDM</a>
-                    <a href="#" class="submenu-item">Inspektorat Jenderal</a>
-                    <a href="#" class="submenu-item">Badan Geologi</a>
-                    <a href="#" class="submenu-item">Badan Pengembangan SDM ESDM</a>
-                    <a href="#" class="submenu-item">Sekretariat Jenderal Dewan Energi Nasional</a>
-                    <a href="#" class="submenu-item">Badan Pengatur Hilir Minyak Dan Gas Bumi</a>
-                </div>
-            </div>
 
-            <a href="usulan.php" class="menu-item">
-                <div class="menu-item-left">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <span>Usulan Tambah/Edit</span>
-                </div>
-            </a>
+        <div class="sidebar-menu">
+          <a href="dashboard.php" class="menu-item">
+        <div class="menu-item-left">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Dashboard</span>
+        </div>
+    </a>
+    <div>
+        <!-- Menu utama dropdown. Jika diklik, bisa diarahkan ke halaman utama pusat (kelola_peta_jabatan.php) -->
+        <a href="kelola_peta_jabatan.php" class="menu-item dropdown-toggle" id="dropdownBtn" style="text-decoration: none; color: inherit;">
+            <div class="menu-item-left">
+                <i class="fa-solid fa-sitemap"></i>
+                <span>Kelola Peta Jabatan</span>
+            </div>
+            <i class="fa-solid fa-chevron-up" id="arrowIcon" style="font-size: 11px;"></i>
+        </a>
+        
+        <!-- Daftar Submenu Unit -->
+        <div class="submenu-container show" id="submenuList">
+            <!-- Jika sedang di halaman Sekretariat Jenderal, beri kelas sub-active -->
+            <a href="sekretariat_jenderal.php" class="submenu-item sub-active">Sekretariat Jenderal</a>
             
-            <a href="logout.php" class="menu-item" style="margin-top: 20px; color: #DC2626;">
-                <div class="menu-item-left">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span>Keluar</span>
-                </div>
-            </a>
+            <!-- Unit-unit lain (sesuaikan file tujuannya nanti jika sudah dibuat, misal: ditjen_migas.php) -->
+            <a href="ditjen_migas.php" class="submenu-item">Direktorat Jenderal Minyak dan Gas Bumi</a>
+            <a href="ditjen_ketenagalistrikan.php" class="submenu-item">Direktorat Jenderal Ketenagalistrikan</a>
+            <a href="ditjen_minerba.php" class="submenu-item">Direktorat Jenderal Mineral Dan Batubara</a>
+            <a href="ditjen_ebtke.php" class="submenu-item">Ditjen Energi Baru, Terbarukan & Konservasi Energi</a>
+            <a href="ditjen_gakkum.php" class="submenu-item">Direktorat Jenderal Penegakan Hukum ESDM</a>
+            <a href="inspektorat_jenderal.php" class="submenu-item">Inspektorat Jenderal</a>
+            <a href="badan_geologi.php" class="submenu-item">Badan Geologi</a>
+            <a href="bpsdm_esdm.php" class="submenu-item">Badan Pengembangan SDM ESDM</a>
+            <a href="setjen_den.php" class="submenu-item">Sekretariat Jenderal Dewan Energi Nasional</a>
+            <a href="bph_migas.php" class="submenu-item">Badan Pengatur Hilir Minyak Dan Gas Bumi</a>
         </div>
     </div>
+
+    <a href="usulan.php" class="menu-item">
+        <div class="menu-item-left">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <span>Usulan Tambah/Edit</span>
+        </div>
+    </a>
+    
+    <a href="logout.php" class="menu-item" style="margin-top: 20px; color: #DC2626;">
+        <div class="menu-item-left">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Keluar</span>
+        </div>
+    </a>
+</div>
 
     <!-- Main Wrapper Kanan (Konten Halaman) -->
     <div class="main-wrapper">
