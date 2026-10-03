@@ -141,17 +141,27 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             color: #94A3B8;
         }
 
-        /* Statistik Ringkasan Cards (Digabung di Sini) */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 25px;
+        /* Bagian Statistik Ringkasan (Isi Asli) */
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-esdm);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        @media (max-width: 768px) {
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1024px) {
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -162,31 +172,30 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             border: 1px solid #E2E8F0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .stat-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--accent-gold-light);
-            color: var(--accent-gold);
-            border-radius: 10px;
+        .stat-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-size: 22px;
         }
 
-        .stat-info h3 {
+        .stat-header span {
             font-size: 12px;
             color: #64748B;
+            font-weight: 600;
             text-transform: uppercase;
-            margin-bottom: 4px;
         }
 
-        .stat-info .number {
-            font-size: 20px;
+        .stat-header i {
+            color: var(--accent-gold);
+            font-size: 18px;
+        }
+
+        .stat-value {
+            font-size: 24px;
             font-weight: 700;
             color: var(--primary-esdm);
         }
@@ -209,12 +218,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             border-bottom: 1px solid #E2E8F0;
         }
 
-        .card-header-flex h2 {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--primary-esdm);
-        }
-
         .btn-tambah {
             background: #059669;
             color: white;
@@ -228,7 +231,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             gap: 8px;
         }
 
-        /* Tabel Data */
         .table-container {
             overflow-x: auto;
         }
@@ -258,7 +260,7 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
 </head>
 <body>
 
-    <!-- Sidebar (Menu Statistik Ringkasan sudah ditiadakan karena digabung ke sini) -->
+    <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-brand">
             <i class="fa-solid fa-building-shield"></i>
@@ -268,7 +270,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
             <li><a href="dashboard.php"><i class="fa-solid fa-chart-pie"></i> Dashboard</a></li>
             <li><a href="kelola_peta_jabatan.php" class="active"><i class="fa-solid fa-sitemap"></i> Kelola Peta Jabatan</a></li>
             <li><a href="profil.php"><i class="fa-solid fa-user-shield"></i> Profil Pegawai</a></li>
-            <li><a href="#"><i class="fa-solid fa-pen-to-square"></i> Usulan Tambah/Edit</a></li>
             <li><a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a></li>
         </ul>
     </div>
@@ -276,39 +277,51 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin_unit') {
     <!-- Content Area -->
     <div class="content">
         <div class="top-banner">
-            <h1>KELOLA PETA JABATAN & STATISTIK RINGKASAN</h1>
-            <p>Monitoring formasi jabatan dan rekapitulasi data kepegawaian unit kerja</p>
+            <h1>KELOLA PETA JABATAN & STATISTIK</h1>
+            <p>Monitoring formasi jabatan serta rekapitulasi data kepegawaian unit kerja</p>
         </div>
 
-        <!-- Bagian Statistik Ringkasan di Atas -->
+        <!-- 1. BAGIAN STATISTIK RINGKASAN (Isi asli dipindah ke sini) -->
+        <div class="section-title">
+            <i class="fa-solid fa-chart-column"></i> Statistik Ringkasan Unit Kerja
+        </div>
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-users-rectangle"></i></div>
-                <div class="stat-info">
-                    <h3>Total Formasi</h3>
-                    <div class="number">42 Jabatan</div>
+                <div class="stat-header">
+                    <span>Total Formasi</span>
+                    <i class="fa-solid fa-sitemap"></i>
                 </div>
+                <div class="stat-value">42</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
-                <div class="stat-info">
-                    <h3>Pegawai Terisi</h3>
-                    <div class="number">38 Orang</div>
+                <div class="stat-header">
+                    <span>Pegawai Terisi</span>
+                    <i class="fa-solid fa-user-check" style="color: #059669;"></i>
                 </div>
+                <div class="stat-value">38</div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="color: #DC2626; background: rgba(220, 38, 38, 0.15);"><i class="fa-solid fa-user-slash"></i></div>
-                <div class="stat-info">
-                    <h3>Formasi Kosong</h3>
-                    <div class="number">4 Jabatan</div>
+                <div class="stat-header">
+                    <span>Formasi Kosong</span>
+                    <i class="fa-solid fa-user-slash" style="color: #DC2626;"></i>
                 </div>
+                <div class="stat-value">4</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span>Tingkat Pengisian</span>
+                    <i class="fa-solid fa-percent" style="color: #2563EB;"></i>
+                </div>
+                <div class="stat-value">90.4%</div>
             </div>
         </div>
 
-        <!-- Bagian Tabel Kelola Peta Jabatan di Bawahnya -->
+        <!-- 2. BAGIAN KELOLA PETA JABATAN -->
         <div class="main-card">
             <div class="card-header-flex">
-                <h2>Daftar Peta Jabatan Unit Kerja</h2>
+                <div class="section-title" style="margin-bottom: 0;">
+                    <i class="fa-solid fa-list-check"></i> Daftar Peta Jabatan
+                </div>
                 <a href="#" class="btn-tambah"><i class="fa-solid fa-plus"></i> Tambah Jabatan</a>
             </div>
 
