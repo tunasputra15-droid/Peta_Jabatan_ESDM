@@ -21,33 +21,43 @@ if (!isset($_SESSION['user'])) {
             --accent-gold: #FFC107;
             --bg-body: #F4F6F9;
             --text-main: #334155;
-            --sidebar-width: 260px;
+            --sidebar-width: 280px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); display: flex; min-height: 100vh; }
 
-        /* Sidebar Kiri */
-        .sidebar { width: var(--sidebar-width); background: #FFFFFF; border-right: 1px solid #E2E8F0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; }
-        .sidebar-brand { padding: 20px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1F5F9; font-size: 14px; font-weight: 800; color: var(--primary-esdm); }
-        .sidebar-brand i { font-size: 18px; color: #D97706; background: #FEF9C3; padding: 8px; border-radius: 6px; }
+        /* Sidebar Kiri (Background Putih sesuai referensi gambar) */
+        .sidebar { width: var(--sidebar-width); background: #FFFFFF; border-right: 1px solid #E2E8F0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; overflow-y: auto; }
+        .sidebar-brand { padding: 20px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1F5F9; font-size: 13px; font-weight: 800; color: var(--primary-esdm); }
+        .sidebar-brand i { font-size: 16px; color: #D97706; background: #FEF9C3; padding: 8px; border-radius: 6px; }
 
         .sidebar-menu { padding: 20px 12px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
-        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: #64748B; transition: 0.2s; }
+        .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: #64748B; transition: 0.2s; cursor: pointer; }
         .menu-item-left { display: flex; align-items: center; gap: 12px; }
-        .menu-item i { font-size: 15px; width: 20px; text-align: center; }
+        .menu-item i { font-size: 14px; width: 20px; text-align: center; }
         
         .menu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
-        .menu-item.active { background: #F1F5F9; color: var(--primary-esdm); font-weight: 700; }
-        .menu-item.active i { color: #D97706; }
+        
+        /* Menu Dropdown Aktif (Background Kuning Lembut sesuai referensi) */
+        .menu-item.dropdown-toggle.active { background: #FEF3C7; color: #92400E; font-weight: 800; }
+        .menu-item.dropdown-toggle.active i { color: #D97706; }
+
+        /* Submenu Container */
+        .submenu-container { display: none; flex-direction: column; padding-left: 15px; margin-top: 4px; gap: 4px; }
+        .submenu-container.show { display: flex; }
+        
+        .submenu-item { padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 11.5px; font-weight: 600; color: #64748B; transition: 0.2s; line-height: 1.3; }
+        .submenu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
+        .submenu-item.sub-active { color: #D97706; font-weight: 700; background: #FEF9C3; }
 
         /* Main Content Wrapper */
         .main-wrapper { margin-left: var(--sidebar-width); flex-grow: 1; display: flex; flex-direction: column; min-height: 100vh; }
 
-        /* Top Header Bar di Kanan */
-        .top-header { background: var(--primary-esdm); color: #FFFFFF; padding: 16px 35px; font-size: 15px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .top-header-right { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 600; }
-        .user-avatar { width: 30px; height: 30px; background: var(--accent-gold); color: var(--primary-esdm); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; }
+        /* Top Header Bar di Kanan (Background Kuning sesuai permintaan) */
+        .top-header { background: var(--accent-gold); color: var(--primary-esdm); padding: 16px 35px; font-size: 15px; font-weight: 800; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .top-header-right { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; color: var(--primary-esdm); }
+        .user-avatar { width: 30px; height: 30px; background: var(--primary-esdm); color: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; }
 
         /* Container Isi Halaman */
         .container { padding: 30px 35px; max-width: 1400px; width: 100%; }
@@ -94,7 +104,7 @@ if (!isset($_SESSION['user'])) {
 </head>
 <body>
 
-    <!-- Sidebar Kiri -->
+    <!-- Sidebar Kiri (Background Putih) -->
     <div class="sidebar">
         <div class="sidebar-brand">
             <i class="fa-solid fa-building-shield"></i>
@@ -107,20 +117,40 @@ if (!isset($_SESSION['user'])) {
                     <span>Dashboard</span>
                 </div>
             </a>
-            <a href="kelola_peta_jabatan.php" class="menu-item active">
-                <div class="menu-item-left">
-                    <i class="fa-solid fa-sitemap"></i>
-                    <span>Kelola Peta Jabatan</span>
+            
+            <!-- Menu Kelola Peta Jabatan dengan Dropdown Interaktif -->
+            <div>
+                <div class="menu-item dropdown-toggle active" id="dropdownBtn">
+                    <div class="menu-item-left">
+                        <i class="fa-solid fa-sitemap"></i>
+                        <span>Kelola Peta Jabatan</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-up" id="arrowIcon" style="font-size: 11px;"></i>
                 </div>
-                <i class="fa-solid fa-chevron-down" style="font-size: 11px;"></i>
-            </a>
+                <!-- Daftar Submenu Eselon I -->
+                <div class="submenu-container show" id="submenuList">
+                    <a href="sekretariat_jenderal.php" class="submenu-item sub-active"> Sekretariat Jenderal</a>
+                    <a href="#" class="submenu-item"> Direktorat Jenderal Minyak dan Gas Bumi</a>
+                    <a href="#" class="submenu-item"> Direktorat Jenderal Ketenagalistrikan</a>
+                    <a href="#" class="submenu-item"> Direktorat Jenderal Mineral Dan Batubara</a>
+                    <a href="#" class="submenu-item"> Ditjen Energi Baru, Terbarukan & Konservasi Energi</a>
+                    <a href="#" class="submenu-item"> Direktorat Jenderal Penegakan Hukum ESDM</a>
+                    <a href="#" class="submenu-item"> Inspektorat Jenderal</a>
+                    <a href="#" class="submenu-item"> Badan Geologi</a>
+                    <a href="#" class="submenu-item"> Badan Pengembangan SDM ESDM</a>
+                    <a href="#" class="submenu-item"> Sekretariat Jenderal Dewan Energi Nasional</a>
+                    <a href="#" class="submenu-item"> Badan Pengatur Hilir Minyak Dan Gas Bumi</a>
+                </div>
+            </div>
+
             <a href="usulan.php" class="menu-item">
                 <div class="menu-item-left">
                     <i class="fa-solid fa-pen-to-square"></i>
                     <span>Usulan Tambah/Edit</span>
                 </div>
             </a>
-            <a href="logout.php" class="menu-item" style="margin-top: auto; color: #DC2626;">
+            
+            <a href="logout.php" class="menu-item" style="margin-top: 20px; color: #DC2626;">
                 <div class="menu-item-left">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span>Keluar</span>
@@ -132,12 +162,11 @@ if (!isset($_SESSION['user'])) {
     <!-- Main Wrapper Kanan -->
     <div class="main-wrapper">
         
-        <!-- Top Header Bar -->
+        <!-- Top Header Bar (Background Kuning) -->
         <div class="top-header">
-            <span>Dashboard Administrator</span>
             <div class="top-header-right">
-                <div class="user-avatar">AD</div>
-                <span>Admin Unit</span>
+
+                <span>Kelola Peta Jabatan</span>
             </div>
         </div>
 
@@ -270,7 +299,7 @@ if (!isset($_SESSION['user'])) {
                             <td class="num-s">-20</td>
                         </tr>
                         <tr>
-                            <td>11. Badan Pengatur Hilir Minyak Dan Gas Bumi</td>
+                            <td> Badan Pengatur Hilir Minyak Dan Gas Bumi</td>
                             <td class="num-b">700</td>
                             <td class="num-e">697</td>
                             <td class="num-s">-3</td>
@@ -282,6 +311,27 @@ if (!isset($_SESSION['user'])) {
         </div>
 
     </div>
+
+    <!-- Script JavaScript untuk Toggle Dropdown Sidebar -->
+    <script>
+        const dropdownBtn = document.getElementById('dropdownBtn');
+        const submenuList = document.getElementById('submenuList');
+        const arrowIcon = document.getElementById('arrowIcon');
+
+        dropdownBtn.addEventListener('click', function() {
+            // Toggle class 'show' pada list submenu
+            submenuList.classList.toggle('show');
+            
+            // Ubah arah panah (chevron-up / chevron-down)
+            if (submenuList.classList.contains('show')) {
+                arrowIcon.classList.remove('fa-chevron-down');
+                arrowIcon.classList.add('fa-chevron-up');
+            } else {
+                arrowIcon.classList.remove('fa-chevron-up');
+                arrowIcon.classList.add('fa-chevron-down');
+            }
+        });
+    </script>
 
 </body>
 </html>
