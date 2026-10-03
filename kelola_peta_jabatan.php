@@ -29,7 +29,7 @@ if (!isset($_SESSION['user'])) {
         body { background-color: var(--bg-body); display: flex; min-height: 100vh; color: var(--text-main); }
 
         /* Sidebar Putih Bersih */
-        .sidebar { width: var(--sidebar-width); background: #FFFFFF; padding: 25px 15px 25px 20px; display: flex; flex-direction: column; border-right: 1px solid #E2E8F0; position: fixed; height: 100vh; overflow-y: auto;}
+        .sidebar { width: 350px ; background: #FFFFFF; padding: 25px 15px 25px 20px; display: flex; flex-direction: column; border-right: 1px solid #E2E8F0; position: fixed; height: 100vh; overflow-y: auto;}
         .sidebar-brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #E2E8F0; color: var(--primary-esdm); }
         .sidebar-brand i { color: var(--accent-gold); font-size: 22px; }
         
@@ -45,7 +45,7 @@ if (!isset($_SESSION['user'])) {
         
         /* Submenu Dropdown */
         .submenu { list-style: none; padding-left: 20px; padding-right: 15px; margin-top: 8px; display: block; border-left: 2px solid #E2E8F0; margin-left: 15px; }
-        .submenu li a { font-size: 10px; padding: 6px 15px 6px 10px; color: #64748B; font-weight: 400; white-space: normal; line-height: 1.4; /* Agar teks panjang unit eselon I bisa membungkus rapi ke bawah */ }
+        .submenu li a { font-size: 10px; padding: 8px 25px 8px 10px; color: #64748B; font-weight: 600; white-space: normal; line-height: 1.4; /* Agar teks panjang unit eselon I bisa membungkus rapi ke bawah */ }
         .submenu li a:hover { color: var(--primary-esdm); }
 
         /* Main Content Area */
