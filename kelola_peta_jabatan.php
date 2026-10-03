@@ -16,20 +16,20 @@ if (!isset($_SESSION['user'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-esdm: #0A192F;
-            --secondary-esdm: #172A45;
-            --accent-gold: #C5A059;
-            --bg-body: #E0F2FE;
-            --text-main: #334155;
-            --sidebar-width: 280px; /* Diperlebar sedikit agar teks tidak turun ke bawah */
-        }
+      :root {
+        --primary-esdm: #0A192F;
+        --secondary-esdm: #172A45;
+        --accent-gold: #C5A059;
+        --bg-body: #E0F2FE;
+        --text-main: #334155;
+        --sidebar-width: 330px; /* <--- Ubah ukurannya di sini (misal dari 280px menjadi 330px) */
+    }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); display: flex; min-height: 100vh; color: var(--text-main); }
 
         /* Sidebar Putih Bersih */
-        .sidebar { width: var(--sidebar-width); background: #FFFFFF; padding: 25px 20px; display: flex; flex-direction: column; border-right: 1px solid #E2E8F0; position: fixed; height: 100vh; overflow-y: auto; box-shadow: 4px 0 15px rgba(0,0,0,0.04); }
+        .sidebar { width: var(--sidebar-width); background: #FFFFFF; padding: 25px 20px; display: flex; flex-direction: column; border-right: 1px solid #E2E8F0; position: fixed; height: 100vh; overflow-y: auto;}
         .sidebar-brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #E2E8F0; color: var(--primary-esdm); }
         .sidebar-brand i { color: var(--accent-gold); font-size: 22px; }
         
@@ -49,7 +49,7 @@ if (!isset($_SESSION['user'])) {
         .submenu li a:hover { color: var(--primary-esdm); }
 
         /* Main Content Area */
-        .main-content { margin-left: var(--sidebar-width); flex: 1; display: flex; flex-direction: column; }
+      .main-content { margin-left: var(--sidebar-width);flex: 1; display: flex; flex-direction: column;}
         
         /* Top Header Baru (Warna Biru Profesional, Tanpa AD) */
         .top-header { background: var(--primary-esdm); padding: 18px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
