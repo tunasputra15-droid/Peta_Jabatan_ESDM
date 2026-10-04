@@ -43,7 +43,7 @@ if (!isset($_SESSION['user'])) {
         .submenu-container { display: none; flex-direction: column; padding-left: 28px; margin-top: 2px; gap: 2px; }
         .submenu-container.show { display: flex; }
         
-        .submenu-item { padding: 8px 12px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; color: #64748B; transition: 0.2s; line-height: 1.3; }
+        .submenu-item { padding: 6px 25px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; color: #64748B; transition: 0.2s; line-height: 1.3; }
         .submenu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
         .submenu-item.sub-active { color: #92400E; font-weight: 700; background: #FEF3C7; }
 
