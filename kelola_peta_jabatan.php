@@ -44,12 +44,12 @@ if (!isset($_SESSION['user'])) {
         .menu-item.dropdown-toggle.active i { color: #D97706; }
 
         /* Submenu Container */
-        .submenu-container { display: none; flex-direction: column; padding-left: 15px; margin-top: 4px; gap: 4px; }
-        .submenu-container.show { display: flex; }
-        
-        .submenu-item { padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 11.5px; font-weight: 600; color: #64748B; transition: 0.2s; line-height: 1.3; }
-        .submenu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
-        .submenu-item.sub-active { color: #D97706; font-weight: 700; background: #FEF9C3; }
+          .submenu-container { display: none; flex-direction: column; padding-left: 28px; margin-top: 2px; gap: 2px; }
+          .submenu-container.show { display: flex; }
+          
+          .submenu-item { padding: 6px 25px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; color: #64748B; transition: 0.2s; line-height: 1.3; }
+          .submenu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
+          .submenu-item.sub-active { color: #92400E; font-weight: 700; background: #FEF3C7; }
 
         /* Main Content Wrapper */
         .main-wrapper { margin-left: var(--sidebar-width); flex-grow: 1; display: flex; flex-direction: column; min-height: 100vh; }
@@ -119,27 +119,29 @@ if (!isset($_SESSION['user'])) {
             </a>
             
             <!-- Menu Kelola Peta Jabatan dengan Dropdown Interaktif -->
-            <div>
-                <div class="menu-item dropdown-toggle active" id="dropdownBtn">
+<div>
+                <!-- Menu Utama Diberi class "menu-item dropdown-toggle active" agar menyala kuning -->
+                <a href="kelola_peta_jabatan.php" class="menu-item dropdown-toggle active" id="dropdownBtn" style="text-decoration: none;">
                     <div class="menu-item-left">
                         <i class="fa-solid fa-sitemap"></i>
                         <span>Kelola Peta Jabatan</span>
                     </div>
                     <i class="fa-solid fa-chevron-up" id="arrowIcon" style="font-size: 11px;"></i>
-                </div>
-                <!-- Daftar Submenu Eselon I -->
+                </a>
+                
+                <!-- Submenu: PASTIKAN TIDAK ADA class "sub-active" DI SINI -->
                 <div class="submenu-container show" id="submenuList">
-                    <a href="sekretariat_jenderal.php" class="submenu-item sub-active"> Sekretariat Jenderal</a>
-                    <a href="#" class="submenu-item"> Direktorat Jenderal Minyak dan Gas Bumi</a>
-                    <a href="#" class="submenu-item"> Direktorat Jenderal Ketenagalistrikan</a>
-                    <a href="#" class="submenu-item"> Direktorat Jenderal Mineral Dan Batubara</a>
-                    <a href="#" class="submenu-item"> Ditjen Energi Baru, Terbarukan & Konservasi Energi</a>
-                    <a href="#" class="submenu-item"> Direktorat Jenderal Penegakan Hukum ESDM</a>
-                    <a href="#" class="submenu-item"> Inspektorat Jenderal</a>
-                    <a href="#" class="submenu-item"> Badan Geologi</a>
-                    <a href="#" class="submenu-item"> Badan Pengembangan SDM ESDM</a>
-                    <a href="#" class="submenu-item"> Sekretariat Jenderal Dewan Energi Nasional</a>
-                    <a href="#" class="submenu-item"> Badan Pengatur Hilir Minyak Dan Gas Bumi</a>
+                    <a href="sekretariat_jenderal.php" class="submenu-item">Sekretariat Jenderal</a>
+                    <a href="#" class="submenu-item">Direktorat Jenderal Minyak dan Gas Bumi</a>
+                    <a href="#" class="submenu-item">Direktorat Jenderal Ketenagalistrikan</a>
+                    <a href="#" class="submenu-item">Direktorat Jenderal Mineral Dan Batubara</a>
+                    <a href="#" class="submenu-item">Ditjen Energi Baru, Terbarukan & Konservasi Energi</a>
+                    <a href="#" class="submenu-item">Direktorat Jenderal Penegakan Hukum ESDM</a>
+                    <a href="#" class="submenu-item">Inspektorat Jenderal</a>
+                    <a href="#" class="submenu-item">Badan Geologi</a>
+                    <a href="#" class="submenu-item">Badan Pengembangan SDM ESDM</a>
+                    <a href="#" class="submenu-item">Sekretariat Jenderal Dewan Energi Nasional</a>
+                    <a href="#" class="submenu-item">Badan Pengatur Hilir Minyak Dan Gas Bumi</a>
                 </div>
             </div>
 
