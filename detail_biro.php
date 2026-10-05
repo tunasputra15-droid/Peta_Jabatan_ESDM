@@ -32,6 +32,26 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+
+          .input-editable {
+            width: 32px;
+            height: 20px;
+            background: #FEF9C3;
+            border: 1px solid #CBD5E1;
+            color: #059669;
+            font-weight: 800;
+            font-size: 11px;
+            text-align: center;
+            border-radius: 4px;
+            padding: 0;
+            vertical-align: middle;
+            outline: none;
+        }
+        .input-editable:focus {
+            border-color: #2563EB;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
         :root {
             --primary-esdm: #0A192F;
             --accent-gold: #FFC107;
@@ -284,7 +304,8 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
                     <i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Sebelumnya 
                 </a>
             </div>
-            
+
+
             <div class="detail-top-row">
                 <div class="detail-title-area">
                     <div class="page-title">DETAIL PETA JABATAN</div>
@@ -353,42 +374,69 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
                                 <div class="b-cls">(Kelas 9)</div>
                             </div>
                             
-                            <div class="job-item-card">
-                                <span>Arsiparis Mahir</span>
-                                <div class="job-meta">(7 - <span>0</span> - 1)</div>
+                           <div class="job-item-card">
+                                    <span>Arsiparis Mahir</span>
+                                    <div class="job-meta">
+                                        (7 - <input type="number" name="eksisting[1]" value="0" min="0" max="1" data-max="1" class="input-editable"> - 1)
+                                    </div>
+                                </div>
+
+
+                          <div class="job-item-card">
+                                    <span>Pengolah Data dan Informasi</span>
+                                    <div class="job-meta">
+                                        (6 - <input type="number" name="eksisting[2]" value="3" min="0" max="3" data-max="3" class="input-editable"> - 3)
+                                    </div>
+                                </div>
+
+
+                         <div class="job-item-card">
+                                    <span>Pengadministrasi Perkantoran</span>
+                                    <div class="job-meta">
+                                        (5 - <input type="number" name="eksisting[3]" value="2" min="0" max="2" data-max="2" class="input-editable"> - 2)
+                                    </div>
+                                </div>
                             </div>
-                            <div class="job-item-card">
-                                <span>Pengolah Data dan Informasi</span>
-                                <div class="job-meta">(6 - <span>3</span> - 3)</div>
-                            </div>
-                            <div class="job-item-card">
-                                <span>Pengadministrasi Perkantoran</span>
-                                <div class="job-meta">(5 - <span>2</span> - 2)</div>
-                            </div>
-                        </div>
 
                         <div class="branch-column">
-                            <div class="branch-title-card">
-                                Kelompok Jabatan Fungsional
-                            </div>
-                            
+                           <div class="branch-column">
+                                <div class="branch-title-card">
+                                    Kelompok Jabatan Fungsional
+                                </div>
+
+
                             <div class="job-item-card">
-                                <span>Perencana Ahli Madya</span>
-                                <div class="job-meta">(12 - <span>3</span> - 7)</div>
-                            </div>
+                                    <span>Perencana Ahli Madya</span>
+                                    <div class="job-meta">
+                                        (12 - <input type="number" name="eksisting[4]" value="3" min="0" max="7" data-max="7" class="input-editable"> - 7)
+                                    </div>
+                                </div>
+
+
+                           <div class="job-item-card">
+                                    <span>Perencana Ahli Muda</span>
+                                    <div class="job-meta">
+                                        (10 - <input type="number" name="eksisting[5]" value="17" min="0" max="21" data-max="21" class="input-editable"> - 21)
+                                    </div>
+                                </div>
+
+
                             <div class="job-item-card">
-                                <span>Perencana Ahli Muda</span>
-                                <div class="job-meta">(10 - <span>17</span> - 21)</div>
+                                    <span>Analis Kebijakan Ahli Muda</span>
+                                    <div class="job-meta">
+                                        (10 - <input type="number" name="eksisting[6]" value="4" min="0" max="4" data-max="4" class="input-editable"> - 4)
+                                    </div>
+                                </div>
+
+
+                           <div class="job-item-card">
+                                    <span>Analis SDM Aparatur Ahli Madya</span>
+                                    <div class="job-meta">
+                                        (12 - <input type="number" name="eksisting[7]" value="10" min="0" max="15" data-max="15" class="input-editable"> - 15)
+                                    </div>
+                                </div>
                             </div>
-                            <div class="job-item-card">
-                                <span>Analis Kebijakan Ahli Muda</span>
-                                <div class="job-meta">(10 - <span>4</span> - 4)</div>
-                            </div>
-                            <div class="job-item-card">
-                                <span>Analis SDM Aparatur Ahli Madya</span>
-                                <div class="job-meta">(12 - <span>10</span> - 15)</div>
-                            </div>
-                        </div>
+
 
                         <div class="branch-column">
                             <div class="branch-title-card">
@@ -396,21 +444,54 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
                             </div>
                             
                             <div class="job-item-card">
-                                <span>Penelaah Teknis Kebijakan</span>
-                                <div class="job-meta">(7 - <span>4</span> - 4)</div>
-                            </div>
-                            <div class="job-item-card">
-                                <span>Penata Layanan Operasional</span>
-                                <div class="job-meta">(7 - <span>1</span> - 1)</div>
-                            </div>
-                        </div>
+                                    <span>Penelaah Teknis Kebijakan</span>
+                                    <div class="job-meta">
+                                        (7 - <input type="number" name="eksisting[8]" value="4" min="0" max="4" data-max="4" class="input-editable"> - 4)
+                                    </div>
+                                </div>
 
+
+                            <div class="job-item-card">
+                                    <span>Penata Layanan Operasional</span>
+                                    <div class="job-meta">
+                                        (7 - <input type="number" name="eksisting[9]" value="1" min="0" max="1" data-max="1" class="input-editable"> - 1)
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
+                        <div style="margin-top: 25px; text-align: right; border-top: 1px solid #E2E8F0; padding-top: 15px;">
+                        <button type="submit" style="background: #059669; color: #fff; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 12px; display: inline-flex; align-items: center; gap: 8px;">
+                            <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Data Eksisting
+                        </button>
+                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
 
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = document.querySelectorAll('.input-editable');
+
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    let maxVal = parseInt(this.getAttribute('data-max')) || 9999;
+                    let currentVal = parseInt(this.value);
+
+                    if (currentVal > maxVal) {
+                        alert("Jumlah eksisting tidak boleh melebihi total kebutuhan (" + maxVal + ")!");
+                        this.value = maxVal; // Otomatis dikunci kembali ke batas maksimal kebutuhan
+                    } else if (currentVal < 0 || isNaN(currentVal)) {
+                        this.value = 0; // Mencegah angka minus
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
