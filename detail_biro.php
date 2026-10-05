@@ -34,7 +34,7 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
     <style>
         :root {
             --primary-esdm: #0A192F;
-            --accent-gold: #FFC107; 
+            --accent-gold: #FFC107;
             --bg-body: #F4F6F9;
             --text-main: #334155;
             --sidebar-width: 290px;
@@ -43,12 +43,12 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); display: flex; min-height: 100vh; }
 
-        /* Sidebar Kiri */
+        /* --- SIDEBAR (Diselaraskan persis dengan standar Gambar 2) --- */
         .sidebar { width: var(--sidebar-width); background: #FFFFFF; border-right: 1px solid #E2E8F0; display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; overflow-y: auto; }
         .sidebar-brand { padding: 20px 24px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #F1F5F9; font-size: 13px; font-weight: 800; color: var(--primary-esdm); }
         .sidebar-brand i { font-size: 16px; color: #D97706; background: #FEF9C3; padding: 8px; border-radius: 6px; }
 
-        .sidebar-menu { padding: 20px 12px; display: flex; flex-direction: column; gap: 4px; flex-grow: 1; }
+        .sidebar-menu { padding: 20px 16px; display: flex; flex-direction: column; gap: 4px; flex-grow: 1; }
         .menu-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-radius: 8px; text-decoration: none; font-size: 12.5px; font-weight: 600; color: #64748B; transition: 0.2s; cursor: pointer; }
         .menu-item-left { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
         .menu-item i { font-size: 14px; width: 20px; text-align: center; }
@@ -56,14 +56,15 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
         .menu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
         .menu-item.dropdown-toggle { background: transparent; color: #64748B; }
 
-        .submenu-container { display: none; flex-direction: column; padding-left: 12px; margin-top: 2px; gap: 2px; }
+        .submenu-container { display: none; flex-direction: column; padding-left: 35px; margin-top: 5px; gap: 4px; }
         .submenu-container.show { display: flex; }
         
-        .submenu-item { padding: 8px 12px; border-radius: 6px; text-decoration: none; font-size: 11px; font-weight: 600; color: #64748B; transition: 0.2s; line-height: 1.3; }
+        /* Teks sub-menu diselaraskan ukurannya dengan menu utama */
+        .submenu-item { padding: 6px 25px; border-radius: 10px; text-decoration: none; font-size: 11px; font-weight: 600; color: #64748B; transition: 0.2s; line-height: 1.1; }
         .submenu-item:hover { background: #F8FAFC; color: var(--primary-esdm); }
         .submenu-item.sub-active { color: #92400E; font-weight: 700; background: #FEF3C7; }
 
-        /* Main Wrapper Kanan - Mepet Rapat Tanpa Jarak Kosong Berlebih */
+        /* --- MAIN WRAPPER KANAN --- */
         .main-wrapper { 
             margin-left: var(--sidebar-width) !important; 
             width: calc(100% - var(--sidebar-width)) !important; 
@@ -78,11 +79,7 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
         .top-header-right { display: flex; align-items: center; gap: 12px; font-size: 12px; font-weight: 700; color: var(--primary-esdm); }
         .user-avatar { width: 30px; height: 30px; background: var(--primary-esdm); color: var(--accent-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 11px; }
 
-        .container { 
-            padding: 30px 25px !important; 
-            width: 100% !important; 
-            max-width: 100% !important; 
-        }
+        .container { padding: 20px 25px !important; width: 100% !important; max-width: 100% !important; }
 
         .back-link { font-size: 11px; color: #D97706; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px; }
         .back-link:hover { text-decoration: underline; }
@@ -117,13 +114,14 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
         .format-badge { background: #FEF9C3; border: 1px solid #FDE047; color: #854D0E; font-size: 9.5px; font-weight: 700; padding: 5px 12px; border-radius: 4px; }
         .format-badge span { color: #059669; text-decoration: underline; }
 
+        /* --- PERBAIKAN GARIS BAGAN (Gambar 1) --- */
         .tree-container { display: flex; flex-direction: column; align-items: center; width: 100%; padding-bottom: 15px; overflow-x: auto; }
         
         .root-node { 
             background: #FFC107; 
             color: #000000; 
             text-align: center; 
-            padding: 12px 35px; 
+            padding: 19px 35px; 
             border-radius: 8px; 
             font-weight: 800; 
             font-size: 12.5px; 
@@ -135,33 +133,38 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
         }
         .root-node .sub-cls { font-size: 9.5px; font-weight: 700; color: #475569; margin-top: 2px; }
         
+        /* Garis vertikal pas di tengah bawah kotak kepala biro */
         .root-node::after {
             content: '';
             position: absolute;
-            bottom: -25px;
+            bottom: -28px;
             left: 50%;
             transform: translateX(-50%);
             width: 3px;
-            height: 25px;
+            height: 26px;
             background-color: #D97706;
         }
 
-        .tree-line-h {
-            width: 65%;
+        /* Garis horizontal penghubung cabang agar tersambung simetris */
+            .tree-line-h {
+            width: 110%; /* Ubah angka ini kalau mau lebih panjang atau pendek */
             height: 3px;
             background-color: #D97706;
-            margin-bottom: 20px;
+            margin: 0 auto 0px ;
             position: relative;
+            left: 10px; /* Tambahkan baris ini kalau garisnya mau digeser sedikit ke kiri/kanan agar pas di tengah */
         }
 
         .branches-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; z-index: 2; }
         
         .branch-column { display: flex; flex-direction: column; align-items: center; position: relative; padding-top: 20px; }
+        
+        /* Garis vertikal kecil turun ke masing-masing judul cabang */
         .branch-column::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 50%;
+            left: 38%;
             transform: translateX(-50%);
             width: 2px;
             height: 20px;
@@ -237,7 +240,7 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
                 </a>
                 
                 <div class="submenu-container show" id="submenuList">
-                    <a href="sekretariat_jenderal.php" class="submenu-item">Sekretariat Jenderal</a>
+                    <a href="sekretariat_jenderal.php" class="submenu-item sub-active">Sekretariat Jenderal</a>
                     <a href="#" class="submenu-item">Direktorat Jenderal Minyak dan Gas Bumi</a>
                     <a href="#" class="submenu-item">Direktorat Jenderal Ketenagalistrikan</a>
                     <a href="#" class="submenu-item">Direktorat Jenderal Mineral Dan Batubara</a>
@@ -270,20 +273,15 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
     <!-- Main Wrapper Kanan -->
     <div class="main-wrapper">
         <div class="top-header">
-            <span>Detail Peta Jabatan - <?php echo $nama_biro; ?></span>
+            <span>Detail Peta Jabatan <?php echo $nama_biro; ?></span>
             <div class="top-header-right">
-                <div class="user-avatar">AD</div>
-                <span>Admin Unit</span>
             </div>
         </div>
 
-        <div class="container">
-            <a href="sekretariat_jenderal.php" class="back-link"><i class="fa-solid fa-arrow-left"></i> Kembali ke 1. Sekretariat Jenderal</a>
-            
+        <div class="container"> 
             <div class="detail-top-row">
                 <div class="detail-title-area">
                     <div class="page-title">DETAIL PETA JABATAN</div>
-                    <div class="page-subtitle">1. <?php echo $nama_biro; ?></div>
                 </div>
                 <div class="summary-totals">
                     <div class="sum-box"><span class="s-label">Total Kebutuhan</span><span class="s-val-b">142</span></div>
