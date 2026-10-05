@@ -279,6 +279,12 @@ $nama_biro = isset($daftar_biro[$biro_id]) ? $daftar_biro[$biro_id] : "Biro Pere
         </div>
 
         <div class="container"> 
+          <div style="margin-bottom: 20px;">
+                <a href="sekretariat_jenderal.php" style="display: inline-flex; align-items: center; gap: 8px; background: #FFFF; color: #FFC106; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: 0.2s;">
+                    <i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Sebelumnya 
+                </a>
+            </div>
+            
             <div class="detail-top-row">
                 <div class="detail-title-area">
                     <div class="page-title">DETAIL PETA JABATAN</div>
